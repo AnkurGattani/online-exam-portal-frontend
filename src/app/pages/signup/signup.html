@@ -1,0 +1,68 @@
+<div class="bootstrap-wrapper">
+  <div class="container">
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-6 offset-md-3">
+
+        <div class="text-center">
+          <img
+            src="assets/logo.png"
+            alt="Signup Image"
+            class="img-fluid d-block mx-auto"
+            style="max-height: 200px; margin-bottom: 20px;"
+          />
+          <h1 class="text-center">Sign Up / Register here</h1>
+        </div>
+
+        <form (ngSubmit)="formSubmit()">
+
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label> Name</mat-label>
+            <input
+              [(ngModel)]="user.name"
+              name="name"
+              matInput
+              placeholder="Enter here"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label> User Email</mat-label>
+            <input
+              [(ngModel)]="user.email"
+              name="email"
+              type="email"
+              matInput
+              placeholder="Enter here"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label> User Password</mat-label>
+            <input
+              [(ngModel)]="user.password"
+              name="password"
+              type="password"
+              matInput
+              placeholder="Enter here"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>User Role</mat-label>
+            <mat-select [(ngModel)]="user.user_roles_enum" name="userRole" required>
+              <mat-option value="STUDENT">Student</mat-option>
+              <mat-option value="ADMIN">Admin</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit" style="margin: auto; display: block;">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
