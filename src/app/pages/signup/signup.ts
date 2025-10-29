@@ -32,7 +32,6 @@ public user = {
   email: '',
   password: '',
   userRolesEnum: '',
-  userRolesEnum: '',
 }
 
 
