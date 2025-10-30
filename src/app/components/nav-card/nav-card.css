@@ -1,0 +1,26 @@
+.nav-card {
+    height: 15rem;
+    width: 15rem;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: black 1px solid;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.nav-card h5 {
+    margin: 0;
+    /* color: #fff; */
+    font-weight: 500;
+    font-size: large;
+}
+
+
+.nav-card:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
