@@ -1,0 +1,37 @@
+<mat-card class="mt10 " *ngFor="let quiz of quizzes">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ quiz.title }}</mat-card-title>
+    <mat-card-subtitle>{{ quiz.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Maximum Marks: {{ quiz.totalMarks }} </p>
+    <p>Time Limit: {{ quiz.duration }} minutes</p>
+  </mat-card-content>
+
+  <div class="container">
+    <div class="row button-row">
+      <mat-card-actions>
+
+        <button (click)="startQuizConfirmation(quiz.examId)" class="button-margin" mat-raised-button color="primary">
+  Start Quiz
+</button>
+
+        <button [routerLink]="['/quiz', quiz.examId]" class="button-margin" mat-raised-button color="primary">
+          Update Quiz
+        </button>
+
+        <button  [routerLink]="['/assign-questions']" class="AssignButton" mat-raised-button color="accent">Assign Questions</button>
+
+        <button class="buttondeleteQuiz" mat-raised-button color="warn" (click)="deleteQuiz(quiz.examId)">Delete quiz
+        </button>
+      </mat-card-actions>
+
+    </div>
+  </div>
+
+</mat-card>
+
+<div class="container text-center mt20">
+  <button routerLink="/add-quiz" mat-raised-button color="accent">Add new Exam</button>
+</div>
