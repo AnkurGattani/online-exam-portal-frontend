@@ -27,12 +27,12 @@ import { ViewQuizes } from './pages/view-exam/view-quizes';
     MatCardModule,
     ViewQuizes,
   ],
-  template:` <app-navbar></app-navbar>
-    <div class="main-content-wrapper">
-        <router-outlet></router-outlet>
-    </div>
-`,
-  //the elements you place directly in the main application template are the pieces of code (components/HTML) that are shared and visible across all pages.
+  template:`
+  <app-navbar></app-navbar>
+  <div class="main-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  `,
   styleUrls: ['./app.css'],
 })
 export class App {

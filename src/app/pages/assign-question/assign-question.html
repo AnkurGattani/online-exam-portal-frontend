@@ -1,0 +1,72 @@
+<form (ngSubmit)="formSubmit()">
+  <h1 style="text-align: center;">Assign Questions</h1>
+
+  <div *ngFor="let assignedQues of criteriaList; let i = index">
+    <mat-card style="margin-bottom: 20px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+
+            <!-- Select Type -->
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Select Type</mat-label>
+              <mat-select [(ngModel)]="assignedQues.type" name="type{{i}}" required>
+                <mat-option *ngFor="let type of questionTypes" [value]="type">{{ type | titlecase }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Select Difficulty -->
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Select Difficulty</mat-label>
+              <mat-select [(ngModel)]="assignedQues.difficulty" name="difficulty{{i}}" required>
+                <mat-option *ngFor="let diff of questionDifficulties" [value]="diff">{{ diff | titlecase }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Number of Questions -->
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Number of Questions</mat-label>
+              <input [(ngModel)]="assignedQues.numberOfQuestions" type="number"
+                name="numberOfQuestions{{i}}" placeholder="e.g., 10" matInput min="1" required>
+            </mat-form-field>
+
+            <!-- Delete Icon -->
+            <mat-icon color="warn" class="w100" style="cursor: pointer; padding-left: 30px;"
+              (click)="deleteCriteria(i)">delete</mat-icon>
+
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Buttons -->
+  <div class="col-md-6 text-center" style="margin-top: 20px; margin-bottom: 20px;">
+    <button mat-raised-button color="primary" type="submit" class="w100">
+      Submit Quiz Criteria
+    </button>
+    <button mat-raised-button color="accent" type="button" class="w100" style="margin-left: 30px;"
+      (click)="addCriteria()">
+      <mat-icon>add</mat-icon> Add More Criteria
+    </button>
+  </div>
+</form>
+
+
+<!-- Display Assigned Questions -->
+<div *ngIf="assignedQuestions.length > 0" style="margin-top: 30px;">
+  <h2 style="text-align: center;">Assigned Questions</h2>
+  <mat-card class="assignedQuestion" *ngFor="let question of assignedQuestions" style="margin-bottom: 15px;">
+    <p>
+      <strong>{{ question.text }}</strong>
+      ({{ question.questionType | titlecase }} - {{ question.difficulty | titlecase }} - {{ question.marks }} Marks)
+    </p>
+    <mat-divider></mat-divider>
+    <mat-list>
+      <mat-list-item *ngFor="let option of question.options">
+        <mat-icon color="primary" style="margin-right: 8px;">circle</mat-icon>
+        {{ option.optionText }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</div>
