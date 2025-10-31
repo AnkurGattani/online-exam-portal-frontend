@@ -22,9 +22,12 @@ import { Navbar } from './components/navbar/navbar';
     MatToolbarModule,
     Navbar,
   ],
-  template:`<router-outlet></router-outlet>
-  <app-navbar></app-navbar>`,
-  //the elements you place directly in the main application template are the pieces of code (components/HTML) that are shared and visible across all pages.
+  template:`
+  <app-navbar></app-navbar>
+  <div class="main-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  `,
   styleUrls: ['./app.css'],
 })
 export class App {
