@@ -1,0 +1,66 @@
+/* Center the entire login wrapper */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full screen height */
+  background-color: #f5f5f5;
+}
+
+/* Card styling */
+.login-card {
+  width: 400px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Logo styling */
+.logo-img {
+  max-height: 120px;
+  margin-bottom: 20px;
+}
+
+/* Title styling */
+.login-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Full width for form fields */
+.full-width {
+  width: 100%;
+}
+
+/* Button styling */
+.login-btn {
+  width: 100%;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #1976d2; /* Darker shade on hover */
+}
+.full-width {
+    width: 100%;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.signup-text {
+  color: #1976d2;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.signup-text:hover {
+  text-decoration: underline;
+}
