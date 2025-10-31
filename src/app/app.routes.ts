@@ -7,40 +7,18 @@ import { AddQuiz } from './pages/add-exam/add-quiz';
 import { UpdateQuiz } from './pages/update-exam/update-quiz';
 import { Start } from './pages/start/start';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 
 export const routes: Routes = [
   {
-	path: 'signup',
-	component: Signup,
-	pathMatch: 'full',
-  },
-  {
-    path:'login',
-    component:Login,
-    pathMatch:'full',
-  },
-
-  {
-    path : 'quizzes',
-    component: ViewQuizes,
+    path: 'signup',
+    component: Signup,
     pathMatch: 'full',
   },
-
   {
-    path: 'add-quiz',
-    component: AddQuiz,
+    path: 'login',
+    component: Login,
     pathMatch: 'full',
   },
-
-  {
-     path: 'quiz/:qid',
-     component: UpdateQuiz
-  },
-
-  {
-    path : 'start/:qid',
-    component: Start,
-
-  }
 
 ];
