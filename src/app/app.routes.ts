@@ -2,8 +2,14 @@ import { Routes } from '@angular/router';
 import { Signup } from './pages/signup/signup';
 import { Login } from './pages/login/login';
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
+import { Home } from './pages/home/home';
 
 export const routes: Routes = [
+  {
+    path: '',
+    component:Home,
+    pathMatch: 'full',
+  },
   {
     path: 'signup',
     component: Signup,
