@@ -1,0 +1,116 @@
+<div class="bootstrap-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-8">
+        <mat-card class="mt20 p40" style="padding-top: 10px;">
+          <h1 class="text-center mat-display-1">
+            <span class="text-primary">Quiz Questions</span>
+          </h1>
+          <mat-divider></mat-divider>
+
+          <div *ngFor="let q of questions; trackBy: trackByQuestionId; let i = index">
+
+            <mat-card class="mt30 question-card mat-elevation-z2">
+              <mat-card-content>
+                <p class="question-text">
+                  <span class="text-secondary font-weight-bold">{{ i + 1 }}.</span>
+                  <span class="ml10" [innerHTML]="q.text"></span>
+                </p>
+                <p class="question-meta">
+                   Marks: <span class="text-info">{{ q.marks }}</span> |
+                   Difficulty: <span class="text-warning">{{ q.difficulty }}</span>
+                </p>
+
+                <mat-divider class="mb20"></mat-divider>
+
+                <div class="row" [ngSwitch]="q.questionType">
+
+                  <ng-container *ngSwitchCase="'MULTIPLE_CHOICE_QUESTION'">
+                    <div class="options-group">
+                      <div class="option-item" *ngFor="let option of q.options">
+                        <input
+                          type="radio"
+                          [name]="q.questionId"
+                          [id]="'option-' + option.optionId"
+                          [value]="option.optionId"
+                          (change)="onSelectSingle(q, option)"
+                          [checked]="q.studentAnswer === option.optionId"
+                        />
+                        <label [for]="'option-' + option.optionId" class="ml10 option-label">{{ option.optionText }}</label>
+                      </div>
+                    </div>
+                  </ng-container>
+                  
+                  <ng-container *ngSwitchCase="'MULTIPLE_SELECT_QUESTION'">
+                    <div class="options-group">
+                      <div class="option-item" *ngFor="let option of q.options">
+                        <input
+                          type="checkbox"
+                          [name]="q.questionId"
+                          [id]="'option-' + option.optionId"
+                          [value]="option.optionId"
+                          (change)="onToggleMulti(q, option, $event)"
+                          [checked]="isCheckedMulti(q, option.optionId)"
+                        />
+                        <label [for]="'option-' + option.optionId" class="ml10 option-label">{{ option.optionText }}</label>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="'NUMERIC'">
+                    <div class="col-md-6">
+                      <input
+                        type="number"
+                        placeholder="Enter your numeric answer"
+                        class="form-control"
+                        [value]="q.studentAnswer"
+                        (input)="onNumericInput(q, $event)"
+                      />
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngSwitchDefault>
+                    <div class="col-md-12">
+                      <p class="text-danger">Question Type: {{ q.questionType }} (Not yet supported)</p>
+                    </div>
+                  </ng-container>
+
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+          <div class="text-center mt40 mb20">
+            <button (click)="submitAnswers()" mat-raised-button color="accent"> Submit Quiz</button>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="col-md-4">
+        <mat-card class="mt20 mat-elevation-z2 sidebar-card">
+          <mat-card-content class="text-center">
+            <h3 class="text-primary">⏰ Quiz Status</h3>
+            <mat-divider class="mb10"></mat-divider>
+
+            <div *ngIf="isQuizStarted; else loadingTimer">
+                <p class="font-weight-bold"
+                   [class.text-success]="totalTimeInSeconds > 60"
+                   [class.text-danger]="totalTimeInSeconds <= 60">
+                    Time Left: <span style="font-size: 1.5em;">{{ getFormattedTime() }}</span>
+                </p>
+            </div>
+
+            <ng-template #loadingTimer>
+                <p class="text-secondary font-weight-bold">Loading timer...</p>
+            </ng-template>
+            <mat-divider class="mt10 mb10"></mat-divider>
+            <p>Total Questions: {{ questions.length }}</p>
+            <p>Unanswered: <span class="text-danger">0</span></p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</div>

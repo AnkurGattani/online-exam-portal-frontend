@@ -1,0 +1,49 @@
+<mat-card>
+  <h1 style="text-align: center;"> Add New Quiz</h1>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+
+        <form (ngSubmit)="formSubmit()">
+
+          <mat-form-field class="w100" appearance="fill">
+            <mat-label>Enter Title</mat-label>
+            <input [(ngModel)]="quiz.title" type="text" name="title" placeholder="Enter here" matInput>
+          </mat-form-field>
+
+          <mat-form-field class="w100" appearance="fill">
+            <mat-label>Enter description</mat-label>
+            <textarea [(ngModel)]="quiz.description" name="description" placeholder="Enter here" matInput rows="4"></textarea>
+          </mat-form-field>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <mat-form-field class="w100" appearance="fill">
+                <mat-label> Enter Total Marks</mat-label>
+                <input [(ngModel)]="quiz.totalMarks" type="text" name="totalMarks" placeholder="Enter here" matInput>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field class="w100" appearance="fill">
+                <mat-label>Enter Duration of Exam (in Mins)</mat-label>
+                <input  [(ngModel)]="quiz.duration" type="text" name="duration" placeholder="Enter here" matInput>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div class="container text-center">
+            <button
+             mat-raised-button color="accent" type="submit">Add</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</mat-card>

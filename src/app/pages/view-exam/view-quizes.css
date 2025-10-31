@@ -1,0 +1,18 @@
+.example-header-image{
+  background-image: url("https://cdn-icons-png.flaticon.com/512/46/46105.png");
+  background-size: cover;
+}
+.button-margin{
+  margin-right: 25px;
+   font-size: smaller;
+}
+.buttondeleteQuiz{
+ font-size: smaller;
+margin-left: 60%;
+margin-right: 10px;
+}
+
+.AssignButton{
+    margin-left: 25px;
+   font-size: smaller;
+}

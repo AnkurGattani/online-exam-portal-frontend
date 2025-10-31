@@ -1,4 +1,6 @@
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +11,7 @@ import { Signup } from './pages/signup/signup';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Navbar } from './components/navbar/navbar';
+import { ViewQuizes } from './pages/view-exam/view-quizes';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,6 +24,8 @@ import { Navbar } from './components/navbar/navbar';
     MatSnackBarModule,
     MatToolbarModule,
     Navbar,
+    MatCardModule,
+    ViewQuizes,
   ],
   template:`
   <app-navbar></app-navbar>
