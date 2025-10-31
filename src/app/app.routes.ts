@@ -9,7 +9,14 @@ import { Start } from './pages/start/start';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { AssignQuestionComponent } from './pages/assign-question/assign-question';
+import { Home } from './pages/home/home';
+
 export const routes: Routes = [
+  {
+    path: '',
+    component:Home,
+    pathMatch: 'full',
+  },
   {
     path: 'signup',
     component: Signup,
