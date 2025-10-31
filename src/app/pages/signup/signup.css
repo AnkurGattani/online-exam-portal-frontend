@@ -1,0 +1,6 @@
+.full-width {
+    width: 100%;
+}
+.padding-top-navbar {
+    padding-top: 64px; /* Adjust this value to match the height of your navbar */
+}

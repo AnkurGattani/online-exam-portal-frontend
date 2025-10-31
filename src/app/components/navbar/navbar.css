@@ -1,0 +1,19 @@
+:host {
+  /* Ensure the component itself spans the width */
+  display: block;
+  /* Set the component to be fixed relative to the viewport */
+  position: fixed;
+  /* Place it at the top */
+  top: 0;
+  /* Make it span the full width of the screen */
+  width: 100%;
+  /* Ensure it sits above other content when scrolling */
+  z-index: 1000;
+}
+.example-icon {
+  color: white;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
