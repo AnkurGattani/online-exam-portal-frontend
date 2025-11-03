@@ -10,6 +10,9 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } fro
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { AssignQuestionComponent } from './pages/assign-question/assign-question';
 import { Home } from './pages/home/home';
+import { authGuard } from './guard/auth-guard';
+import { roleGuard } from './guard/role-guard';
+
 
 export const routes: Routes = [
   {
@@ -29,13 +32,19 @@ export const routes: Routes = [
   },
   {
     path: 'admin/dashboard',
-    component: AdminDashboard
+    component: AdminDashboard,
+    canActivate: [authGuard, roleGuard] 
   },
    {
     path: 'assign-question',
     component: AssignQuestionComponent,
     pathMatch: 'full',
 
+  },
+   {
+    path: 'home',
+    component: Home,
+    canActivate: [authGuard] //  Only login required
   }
   // {
   //   path: 'admin/exams',
