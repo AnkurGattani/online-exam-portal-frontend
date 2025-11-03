@@ -13,7 +13,7 @@
 
   <!-- Login -->
   <a mat-button
-     *ngIf="currentUrl !== '/login'"
+     *ngIf="!isLoggedIn() && currentUrl !== '/login'"
      routerLink="/login"
      routerLinkActive="active-link"
      [routerLinkActiveOptions]="{ exact: true }"
@@ -24,12 +24,21 @@
 
   <!-- Signup -->
   <a mat-button
-     *ngIf="currentUrl !== '/signup'"
+     *ngIf="!isLoggedIn() && currentUrl !== '/signup'"
      routerLink="/signup"
      routerLinkActive="active-link"
      [routerLinkActiveOptions]="{ exact: true }"
      style="text-decoration: none; color: white; display: flex; align-items: center; gap: 6px;">
     <span>SignUp</span>
     <mat-icon>person_add</mat-icon>
+  </a>
+
+  <!-- Logout -->
+  <a mat-button
+     *ngIf="isLoggedIn()"
+     (click)="logout()"
+     style="text-decoration: none; color: white; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+    <span>Logout</span>
+    <mat-icon>logout</mat-icon>
   </a>
 </mat-toolbar>

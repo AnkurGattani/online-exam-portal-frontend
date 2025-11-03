@@ -31,4 +31,11 @@ export class LoginService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('jwtToken');
   }
+
+  //Logout functionality
+  logout(): void {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userRole');
+  }
+  
 }
