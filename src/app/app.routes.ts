@@ -47,10 +47,10 @@ export const routes: Routes = [
   }, // ---------------------------------------------------------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ----------------------------------------------------------------------
 
   {
-    path: 'assign-question',
+    path: 'admin/quizzes/:examId/assign-questions',
     component: AssignQuestionComponent,
     pathMatch: 'full',
-    canActivate: [authGuard, roleGuard],
+    // canActivate: [authGuard, roleGuard],
   },
   {
     path: 'add-quiz',

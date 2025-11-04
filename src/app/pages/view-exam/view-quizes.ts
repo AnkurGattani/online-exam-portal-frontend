@@ -1,62 +1,46 @@
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-// Import CommonModule directly instead of just NgForOf
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button'; // <-- ADD THIS
+import { NgForOf } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { error, log } from 'console';
 import Swal from 'sweetalert2';
 import { Quiz, QuizData } from '../../services/viewExam/quiz';
-import { RouterLink, Router } from '@angular/router';
-import { LoginService } from '../../services/login/login';
+import { RouterLink, Router } from "@angular/router";
+
 
 @Component({
-  selector: 'app-view-quizes',
-  standalone: true,
-  // Ensure CommonModule is in the imports array to enable *ngIf and *ngFor
-  imports: [MatCardModule, MatButtonModule, CommonModule, RouterLink],
-  templateUrl: './view-quizes.html',
-  styleUrls: ['./view-quizes.css'],
+  selector: 'app-view-quizes',
+  standalone: true,
+  imports: [MatCardModule, NgForOf, MatButtonModule, RouterLink], // <-- ADD MatButtonModule HERE
+  templateUrl: './view-quizes.html',
+  styleUrls: ['./view-quizes.css'],
 })
-export class ViewQuizes implements OnInit {
 
-  // Inject Services
-  private examService = inject(Quiz);
-  private router = inject(Router);
-  private loginService = inject(LoginService); // <--- INJECT LOGIN SERVICE
 
-  quizzes: QuizData[] = [];
-  isAdmin: boolean = false; // <--- NEW PROPERTY
 
-  ngOnInit(): void {
-    // 1. Check the user's role before loading quizzes
-    this.checkUserRole();
 
-    // 2. Load quizzes
+export class ViewQuizes {
+constructor() { }
+
+private examService = inject(Quiz);
+private router = inject(Router);
+
+
+
+quizzes: QuizData[] = [];  // explicitly say its an interface type
+
+  ngOnInit(): void{
     this.examService.quizzes().subscribe(
-      (data: any) => {
-        this.quizzes = data;
-        console.log(this.quizzes);
-      },
-      (error) => {
-        console.log('Error loading quizzes:', error);
-        Swal.fire('Error !', 'Error in loading data !', 'error');
-      }
-    );
-  }
 
-  // New method to check and set the admin flag
-  private checkUserRole(): void {
-    const role = this.loginService.getUserRole();
-
-    // 🛑 DEBUGGING LOGS (Keep these until it works) 🛑
-    console.log('--- ADMIN BUTTON DEBUG ---');
-    console.log('Role returned by service:', role);
-
-    // --- 🛠️ THE CRITICAL FIX IS HERE ---
-    // Your backend sends "ROLE_ADMIN", not "ADMIN"
-    this.isAdmin = role === 'ADMIN';
-
-    console.log('Is this role equal to "ROLE_ADMIN"?', this.isAdmin);
-    // 🛑 END OF LOGS 🛑
+   (data:any)=>{
+    this.quizzes=data;
+    console.log(this.quizzes )
+   },
+   (error)=>{
+    console.log(error);
+    Swal.fire('Error !', "Error in loading data !", 'error');
+   }
+    )
   }
 
   startQuizConfirmation(examId: number) {
@@ -65,24 +49,44 @@ export class ViewQuizes implements OnInit {
       text: 'You will not be able to change your answers once submitted!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#3085d6', // Customize button colors
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Start Quiz!',
-      cancelButtonText: 'Cancel',
+      cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Starting!', 'The quiz is now starting.', 'success');
+        // --- THIS IS THE CRITICAL PART ---
+        // If the user clicks "Yes, Start Quiz!", you put the logic
+        // to actually start the quiz here.
+        // This will likely be a navigation command.
+        // Example: this.router.navigate(['/start-quiz', examId]);
+
+        // For now, let's just show a success message:
+        Swal.fire(
+          'Starting!',
+          'The quiz is now starting.',
+          'success'
+        );
+
         this.router.navigate(['/start', examId]);
+        // **IMPORTANT:** Add your actual quiz start logic here.
+        // For example, if you need to navigate to the quiz page:
+        // this.router.navigate(['/start-quiz', examId]);
+
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire('Cancelled', 'You have not started the quiz.', 'error');
+        // This block executes if the user clicks "Cancel" or dismisses the dialog
+        Swal.fire(
+          'Cancelled',
+          'You have not started the quiz.',
+          'error'
+        );
       }
     });
   }
 
-  public deleteQuiz(examId: number): void {
-    // Only allow deletion if the user is confirmed as Admin
-    if (!this.isAdmin) return;
+  // delete quiz
 
+  public deleteQuiz(examId: number): void {
     Swal.fire({
       icon: 'info',
       title: 'Are you sure?',
@@ -90,12 +94,18 @@ export class ViewQuizes implements OnInit {
       showCancelButton: true,
     }).then((result) => {
       if (result.isConfirmed) {
+        // Call the service method with the ID
         this.examService.deleteQuiz(examId).subscribe(
           (data: any) => {
+            // Success: Show confirmation and update the local list
             Swal.fire('Success', 'Quiz deleted successfully', 'success');
+
+            // this.quizzes = ...,takes the newly created array (which is missing the deleted quiz) and replaces the old array with it.
+            // which updates the page without reloading
             this.quizzes = this.quizzes.filter((quiz) => quiz.examId !== examId);
           },
           (error) => {
+            // Error: Show error message
             console.log(error);
             Swal.fire('Error', 'Error in deleting quiz', 'error');
           }
@@ -103,5 +113,12 @@ export class ViewQuizes implements OnInit {
       }
     });
   }
-  updateQuiz() {}
+
+
+ updateQuiz(){
+
+ }
+
+
+
 }
