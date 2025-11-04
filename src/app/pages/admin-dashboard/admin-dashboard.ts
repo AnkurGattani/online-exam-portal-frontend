@@ -15,7 +15,7 @@ export class AdminDashboard {
   protected readonly adminName = signal('Admin');
 
   protected readonly navCards = signal([
-    { title: 'Exam Management', path: 'admin/exams' },
+    { title: 'Exam Management', path: 'admin/quizzes' },
     { title: 'Question Bank', path: 'admin/questionbank' },
     { title: 'Reports', path: 'admin/reports' },
   ]);

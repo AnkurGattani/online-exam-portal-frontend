@@ -1,6 +1,10 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const Interceptor: HttpInterceptorFn = (req, next) => {
+
+  if(req.url.includes('/login') || req.url.includes('/register')){
+    return next(req);
+  }
   // Get token from localStorage
   const token = localStorage.getItem('jwtToken');
 
@@ -12,7 +16,7 @@ export const Interceptor: HttpInterceptorFn = (req, next) => {
       }
     });
     return next(authReq);
-  } 
+  }
 
   // If no token, send the original request
   return next(req);

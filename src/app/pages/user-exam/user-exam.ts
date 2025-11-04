@@ -1,34 +1,31 @@
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 // Import CommonModule directly instead of just NgForOf
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+// Update the import path and filename to match the actual file (e.g., 'quiz.service' or 'Quiz')
 import { Quiz, QuizData } from '../../services/viewExam/quiz';
+// If your file is named differently, adjust the path and filename accordingly.
 import { RouterLink, Router } from '@angular/router';
 import { LoginService } from '../../services/login/login';
 
 @Component({
-  selector: 'app-view-quizes',
-  standalone: true,
-  // Ensure CommonModule is in the imports array to enable *ngIf and *ngFor
+  selector: 'app-user-exam',
   imports: [MatCardModule, MatButtonModule, CommonModule, RouterLink],
-  templateUrl: './view-quizes.html',
-  styleUrls: ['./view-quizes.css'],
+  templateUrl: './user-exam.html',
+  styleUrl: './user-exam.css',
 })
-export class ViewQuizes implements OnInit {
+export class UserExam implements OnInit {
 
   // Inject Services
   private examService = inject(Quiz);
   private router = inject(Router);
-  private loginService = inject(LoginService); // <--- INJECT LOGIN SERVICE
 
   quizzes: QuizData[] = [];
-  isAdmin: boolean = false; // <--- NEW PROPERTY
 
   ngOnInit(): void {
-    // 1. Check the user's role before loading quizzes
-    this.checkUserRole();
 
     // 2. Load quizzes
     this.examService.quizzes().subscribe(
@@ -41,22 +38,6 @@ export class ViewQuizes implements OnInit {
         Swal.fire('Error !', 'Error in loading data !', 'error');
       }
     );
-  }
-
-  // New method to check and set the admin flag
-  private checkUserRole(): void {
-    const role = this.loginService.getUserRole();
-
-    // 🛑 DEBUGGING LOGS (Keep these until it works) 🛑
-    console.log('--- ADMIN BUTTON DEBUG ---');
-    console.log('Role returned by service:', role);
-
-    // --- 🛠️ THE CRITICAL FIX IS HERE ---
-    // Your backend sends "ROLE_ADMIN", not "ADMIN"
-    this.isAdmin = role === 'ADMIN';
-
-    console.log('Is this role equal to "ROLE_ADMIN"?', this.isAdmin);
-    // 🛑 END OF LOGS 🛑
   }
 
   startQuizConfirmation(examId: number) {
@@ -79,29 +60,4 @@ export class ViewQuizes implements OnInit {
     });
   }
 
-  public deleteQuiz(examId: number): void {
-    // Only allow deletion if the user is confirmed as Admin
-    if (!this.isAdmin) return;
-
-    Swal.fire({
-      icon: 'info',
-      title: 'Are you sure?',
-      confirmButtonText: 'Delete',
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.examService.deleteQuiz(examId).subscribe(
-          (data: any) => {
-            Swal.fire('Success', 'Quiz deleted successfully', 'success');
-            this.quizzes = this.quizzes.filter((quiz) => quiz.examId !== examId);
-          },
-          (error) => {
-            console.log(error);
-            Swal.fire('Error', 'Error in deleting quiz', 'error');
-          }
-        );
-      }
-    });
-  }
-  updateQuiz() {}
 }

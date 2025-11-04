@@ -10,7 +10,10 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } fro
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { AssignQuestionComponent } from './pages/assign-question/assign-question';
 import { Home } from './pages/home/home';
-
+import { authGuard } from './guard/auth-guard';
+import { roleGuard } from './guard/role-guard';
+import { Unauthorized } from './unauthorized/unauthorized';
+import { UserExam } from './pages/user-exam/user-exam';
 export const routes: Routes = [
   {
     path: '',
@@ -29,18 +32,49 @@ export const routes: Routes = [
   },
   {
     path: 'admin/dashboard',
-    component: AdminDashboard
+    component: AdminDashboard,
+    canActivate: [authGuard, roleGuard]
   },
-   {
+  // {
+  //   path: 'admin/quizzes',
+  //   component: ViewQuizes,
+  //    canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
+  // },
+  {
+    path: 'start/:qid',
+    component: Start,
+    canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
+  }, // ---------------------------------------------------------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ----------------------------------------------------------------------
+
+  {
     path: 'assign-question',
     component: AssignQuestionComponent,
     pathMatch: 'full',
-
-  }
-  // {
-  //   path: 'admin/exams',
-  //   loadComponent: () => import('./pages/exam-management/exams').then(m => m.Exams)
-  // },
+    canActivate: [authGuard, roleGuard],
+  },
+  {
+    path: 'add-quiz',
+    component: AddQuiz,
+    canActivate: [authGuard, roleGuard],
+  },
+  {
+    path: 'quiz/:qid',
+    component: UpdateQuiz,
+    canActivate: [authGuard, roleGuard],
+  },
+  {
+    path: 'unauthorized',
+    component: Unauthorized,
+    pathMatch: 'full'
+  },
+  {
+    path: 'user-exam',
+    component: UserExam,
+  },
+  {
+    path: 'admin/quizzes',
+    loadComponent: () => import('./pages/view-exam/view-quizes').then(m => m.ViewQuizes)
+  },
   // {
   //   path: 'admin/questionbank',
   //   loadComponent: () => import('./pages/question-bank/questionbank').then(m => m.QuestionBank)
