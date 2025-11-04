@@ -22,14 +22,13 @@
             <div class="col-md-6">
               <mat-form-field class="w100" appearance="fill">
                 <mat-label> Enter Total Marks</mat-label>
-                <input [(ngModel)]="quiz.totalMarks" type="text" name="totalMarks" placeholder="Enter here" matInput>
+                <input [(ngModel)]="quiz.totalMarks" type="number" name="totalMarks" placeholder="Enter Marks here" matInput>
               </mat-form-field>
             </div>
-
             <div class="col-md-6">
               <mat-form-field class="w100" appearance="fill">
                 <mat-label>Enter Duration of Exam (in Mins)</mat-label>
-                <input  [(ngModel)]="quiz.duration" type="text" name="duration" placeholder="Enter here" matInput>
+                <input  [(ngModel)]="quiz.duration" type="number" name="duration" placeholder="Enter duration in minutes" matInput>
               </mat-form-field>
             </div>
 

@@ -42,7 +42,6 @@ export interface QuestionForTest {
     NgSwitchDefault,
     MatCardModule,
     MatDividerModule,
-    JsonPipe,
     MatButtonModule,
   ],
   templateUrl: './start.html',
@@ -253,28 +252,7 @@ export class Start implements OnInit {
     responses.forEach((resp) => {
       const savedValue = resp.selectedResponse; // This is string[]
 
-      // We can't know the type yet, so we'll have to parse it in the `loadQuestionsArray` map.
-      // Correction: We *can* know the type *after* questions are loaded.
-      // Simpler: Let's just store the raw API value and parse it in the map.
-      // Even better: Let's assume the question type to parse it NOW.
-      // This is too complex. We must load questions first, then populate answers.
-      // *** Re-thinking the flow ***
-      // The flow is fine. `loadSavedAnswersAndQuestions` calls `populateSavedAnswers` *first*, then `loadQuestionsArray`.
-      // We will store the raw `string[]` from the API in `savedAnswers`.
-
-      // We must get the question type from the `questions` array.
-      // *** THIS IS THE FLAW. We need questions *before* we can parse answers. ***
-
-      // *** FINAL REVISED FLOW (Simpler) ***
-      // 1. `getRemainingTime` -> `loadQuizDetailsAndQuestions` (if new) or `loadQuestionsAndResponses` (if resuming)
-      // 2. `loadQuestionsAndResponses` -> forkJoin [getQuestions, getResponses]
-      // 3. *Then* map them.
-
-      // Sticking to the sequential plan for simplicity:
-      // `loadSavedAnswersAndQuestions` -> `getSavedResponses` -> `populateSavedAnswers` (stores raw string[]) -> `loadQuestionsArray`
-      // `loadQuestionsArray` -> `getQuestionsForTest` -> `map` -> *parses the raw string[]*
-
-      // `populateSavedAnswers` (stores raw string[] from API)
+ 
       this.savedAnswers[resp.questionId] = resp.selectedResponse;
     });
   }
@@ -375,7 +353,7 @@ export class Start implements OnInit {
     if (this.timer) {
         clearInterval(this.timer);
     }
-    
+
     this.clearTimerStorage(); // Mark quiz as finished
     this.isQuizStarted = false;
 

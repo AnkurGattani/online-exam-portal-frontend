@@ -25,7 +25,6 @@ import { ViewQuizes } from './pages/view-exam/view-quizes';
     MatToolbarModule,
     Navbar,
     MatCardModule,
-    ViewQuizes,
   ],
   template:`
   <app-navbar></app-navbar>
