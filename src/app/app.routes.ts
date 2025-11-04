@@ -17,7 +17,7 @@ import { UserExam } from './pages/user-exam/user-exam';
 export const routes: Routes = [
   {
     path: '',
-    component:Home,
+    component: Home,
     pathMatch: 'full',
   },
   {
@@ -75,10 +75,10 @@ export const routes: Routes = [
     path: 'admin/quizzes',
     loadComponent: () => import('./pages/view-exam/view-quizes').then(m => m.ViewQuizes)
   },
-  // {
-  //   path: 'admin/questionbank',
-  //   loadComponent: () => import('./pages/question-bank/questionbank').then(m => m.QuestionBank)
-  // },
+  {
+    path: 'admin/questionbank',
+    loadComponent: () => import('./pages/question-bank/question-bank').then(m => m.QuestionBank)
+  },
   // {
   //   path: 'admin/reports',
   //   loadComponent: () => import('./pages/reports/reports').then(m => m.Reports)
