@@ -1,0 +1,26 @@
+.question-card {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.option-input {
+    flex: 1;
+}
+
+.submit-btn {
+    text-align: right;
+    margin-top: 20px;
+}
