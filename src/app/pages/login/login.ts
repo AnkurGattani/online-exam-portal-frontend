@@ -43,7 +43,6 @@ export class Login {
     }
 
     //request to server to generate token
-    
     this.loginService.generateToken(this.user).subscribe({
 
       next: (data: any) => {
@@ -52,27 +51,26 @@ export class Login {
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
 
         // Redirect based on role
-        const role = this.loginService.getUserRole();     
-         localStorage.setItem('userRole', role ?? ''); 
+        const role = this.loginService.getUserRole();
+         localStorage.setItem('userRole', role ?? '');
         console.log('Decoded role from token:', role);
 
         if (role === 'ADMIN') {
           this.router.navigate(['/admin/dashboard']);
         } else if (role === 'STUDENT') {
-          this.router.navigate(['/student-dashboard']);
+          this.router.navigate(['/user-exam']);
         } else {
           this.router.navigate(['/']);
         }
-
       },
       error: (error: any) => {
         console.log('Error generating token', error);
         this.snackBar.open('Invalid credentials', 'Close', { duration: 3000 });
       },
-    
+
     });
 
-    
+
 
 
     console.log('Form Submitted');
