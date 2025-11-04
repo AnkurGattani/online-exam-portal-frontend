@@ -1,5 +1,6 @@
 <mat-card class="mt10 " *ngFor="let quiz of quizzes">
   <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ quiz.title }}</mat-card-title>
     <mat-card-subtitle>{{ quiz.description }}</mat-card-subtitle>
   </mat-card-header>
@@ -12,24 +13,14 @@
     <div class="row button-row">
       <mat-card-actions>
 
-        <!-- <button (click)="startQuizConfirmation(quiz.examId)" class="button-margin" mat-raised-button color="primary">
-          Start Quiz
-        </button> -->
+        <button [routerLink]="['/quiz', quiz.examId]" class="button-margin" mat-raised-button color="primary">
+          Update Quiz
+        </button>
 
-        <ng-container *ngIf="isAdmin">
-          <button [routerLink]="['/quiz', quiz.examId]" class="button-margin" mat-raised-button color="primary">
-            Update Quiz
-          </button>
+        <button  [routerLink]="['/admin/quizzes',quiz.examId, 'assign-questions']" class="AssignButton" mat-raised-button color="accent">Assign Questions</button>
 
-          <button [routerLink]="['/assign-questions']" class="AssignButton" mat-raised-button color="accent">
-            Assign Questions
-          </button>
-
-          <button class="buttondeleteQuiz" mat-raised-button color="warn" (click)="deleteQuiz(quiz.examId)">
-            Delete quiz
-          </button>
-        </ng-container>
-
+        <button class="buttondeleteQuiz" mat-raised-button color="warn" (click)="deleteQuiz(quiz.examId)">Delete quiz
+        </button>
       </mat-card-actions>
 
     </div>
@@ -38,5 +29,5 @@
 </mat-card>
 
 <div class="container text-center mt20">
-  <button *ngIf="isAdmin" routerLink="/add-quiz" mat-raised-button color="accent">Add new Exam</button>
+  <button routerLink="/add-quiz" mat-raised-button color="accent">Add new Exam</button>
 </div>
