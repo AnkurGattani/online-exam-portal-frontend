@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login/login';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ import { LoginService } from '../../services/login/login';
 export class Login {
   user = { email: '', password: '' };
 
-  constructor(private snackBar: MatSnackBar,private loginService:LoginService) {}
+  constructor(private snackBar: MatSnackBar, private loginService:LoginService, private router:Router) {}
 
   formSubmit() {
     if (!this.user.email.trim() || !this.user.password) {
@@ -49,6 +50,20 @@ export class Login {
         console.log('Token generated successfully', data);
         localStorage.setItem('jwtToken', data.token); //  Save token
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+
+        // Redirect based on role
+        const role = this.loginService.getUserRole();     
+         localStorage.setItem('userRole', role ?? ''); 
+        console.log('Decoded role from token:', role);
+
+        if (role === 'ADMIN') {
+          this.router.navigate(['/admin/dashboard']);
+        } else if (role === 'STUDENT') {
+          this.router.navigate(['/student-dashboard']);
+        } else {
+          this.router.navigate(['/']);
+        }
+
       },
       error: (error: any) => {
         console.log('Error generating token', error);
@@ -63,6 +78,7 @@ export class Login {
     console.log('Form Submitted');
     console.log('Email:', this.user.email);
     console.log('Password:', this.user.password);
+
     this.snackBar.open('Login successful!', 'Close', {
       duration: 3000
     });
