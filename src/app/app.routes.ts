@@ -35,22 +35,16 @@ export const routes: Routes = [
     component: AdminDashboard,
     canActivate: [authGuard, roleGuard]
   },
-  // {
-  //   path: 'admin/quizzes',
-  //   component: ViewQuizes,
-  //    canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
-  // },
   {
     path: 'start/:qid',
     component: Start,
     canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
-  }, // ---------------------------------------------------------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ----------------------------------------------------------------------
+  }, // --------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ------------------
 
   {
     path: 'admin/quizzes/:examId/assign-questions',
     component: AssignQuestionComponent,
     pathMatch: 'full',
-    // canActivate: [authGuard, roleGuard],
   },
   {
     path: 'add-quiz',
@@ -79,9 +73,15 @@ export const routes: Routes = [
     path: 'admin/questionbank',
     loadComponent: () => import('./pages/question-bank/question-bank').then(m => m.QuestionBank)
   },
-  // {
-  //   path: 'admin/reports',
-  //   loadComponent: () => import('./pages/reports/reports').then(m => m.Reports)
-  // },
+  {
+    path: 'student/reports',
+    loadComponent: () => import('./pages/student-report/student-report').then(m => m.StudentReport),
+    canActivate: [authGuard] //  Only logged-in users
+  },
+  {
+    path: 'admin/reports',
+    loadComponent: () => import('./pages/admin-report/admin-report').then(m => m.AdminReport),
+    canActivate: [authGuard, roleGuard] //  Only admins
+  }
 
 ];
