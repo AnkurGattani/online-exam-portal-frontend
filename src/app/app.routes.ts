@@ -14,6 +14,7 @@ import { authGuard } from './guard/auth-guard';
 import { roleGuard } from './guard/role-guard';
 import { Unauthorized } from './unauthorized/unauthorized';
 import { UserExam } from './pages/user-exam/user-exam';
+import { StudentDashboard } from './pages/student-dashboard/student-dashboard';
 export const routes: Routes = [
   {
     path: '',
@@ -36,11 +37,16 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard]
   },
   {
+    path: 'student/dashboard',
+    component: StudentDashboard,
+    canActivate: [authGuard]
+  },
+  {
     path: 'start/:qid',
     component: Start,
     canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
-  }, // --------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ------------------
-
+  },
+  // ----------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ---------
   {
     path: 'admin/quizzes/:examId/assign-questions',
     component: AssignQuestionComponent,
@@ -64,6 +70,10 @@ export const routes: Routes = [
   {
     path: 'user-exam',
     component: UserExam,
+  },
+  {
+    path: 'student/exams',
+    loadComponent: () => import('./pages/user-exam/user-exam').then(m => m.UserExam),
   },
   {
     path: 'admin/quizzes',
