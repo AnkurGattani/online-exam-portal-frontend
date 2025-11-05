@@ -1,27 +1,97 @@
-.full-width {
-    width: 100%;
+/* --- Color Palette from Report Module --- */
+/* Deep Blue (Primary): #3f51b5 */
+/* Accent Green (Success): #4caf50 */
+/* Dark Background: #1e293b */
+
+/* General Layout and Background */
+.bootstrap-wrapper {
+    background-color: #f4f7f6;
+    min-height: 100vh;
 }
 
-.padding-top-navbar {
-    padding-top: 64px;
-    /* Adjust this value to match the height of your navbar */
+.container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 }
 
+/* Header Section Styling */
+.admin-dashboard-header {
+    background: linear-gradient(135deg, #2a59a4, #234393) !important;
+    border-radius: 12px !important;
+    padding: 3.5rem !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
 
+.admin-dashboard-header h1 {
+    color: #ffc107 !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.admin-dashboard-header .lead {
+    color: #a0aec0;
+}
+
+.admin-dashboard-header h2 {
+    color: #1a276e !important;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+/* 🚀 FIX: Navigation Cards Layout (Using Flexbox for better alignment) */
 .nav-cards {
     display: flex;
-    justify-content: space-around;
-    /* Equal spacing between cards */
-    gap: 20px;
-    /* Space between cards */
+    /* This makes sure lines of cards start from the left */
+    justify-content: flex-start;
+    /* Consistent spacing between all items */
+    gap: 25px;
     flex-wrap: wrap;
-    /* Wrap on smaller screens */
+}
+
+.nav-card-item {
+    /* Set a fixed size basis for the cards and allow them to grow if space permits */
+    flex: 0 0 250px;
+    /* If you prefer cards to stretch to fill the row: flex: 1 1 250px; */
+    /* If you want the cards to align perfectly under each other, stick with flex: 0 0 250px; */
+    /* You can remove max-width to let flex handle sizing */
+    /* max-width: 280px;  */
 }
 
 
-nav-card {
-    flex: 1 1 200px;
-    /* Flexible width with min size */
-    max-width: 250px;
-    /* Prevent cards from getting too large */
+/* IMPORTANT: Styling the Custom nav-card Component */
+:host ::ng-deep nav-card {
+    display: block;
+    background-color: #2d3748;
+    color: rgb(147, 147, 23);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+    cursor: pointer;
+    min-height: 130px;
+    /* Accent stripe with Report Module Green */
+    border-left: 5px solid #4caf50;
+    width: 100%; /* Ensure it takes full width of its container */
+}
+
+/* Hover Effect */
+:host ::ng-deep nav-card:hover {
+    background-color: #3b4554;
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    /* Change accent color to Deep Blue on hover */
+    border-left-color: #3f51b5;
+}
+
+/* Ensure the component content looks good inside the card */
+:host ::ng-deep nav-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* --- Utility Classes --- */
+.full-width {
+    width: 100%;
 }

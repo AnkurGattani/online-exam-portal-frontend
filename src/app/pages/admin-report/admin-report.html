@@ -1,15 +1,30 @@
 <div class="report-container">
-  <h2>Reports for Exam ID: {{ examId }}</h2>
-  <input type="number" [(ngModel)]="examId" placeholder="Enter Exam ID">
-  <button (click)="loadReports()">Load Reports</button>
+  <h1>📊 Exam Reports Dashboard</h1>
 
-  <table>
+  <div class="input-group">
+    <input
+      type="number"
+      [(ngModel)]="examId"
+      placeholder="Enter Exam ID to View Reports"
+      min="1"
+    >
+    <button (click)="loadReports()">
+      <i class="fas fa-search"></i> Load Reports
+    </button>
+  </div>
+
+  <h2 *ngIf="examId">Reports for Exam ID: {{ examId }}</h2>
+  <p *ngIf="!reports || reports.length === 0" class="no-data-message">
+    No reports loaded. Please enter a valid Exam ID and click "Load Reports".
+  </p>
+
+  <table *ngIf="reports && reports.length > 0">
     <thead>
       <tr>
         <th>Student Name</th>
         <th>Exam Title</th>
-        <th>Marks Obtained</th>
-        <th>Total Marks</th>
+        <th class="number-col">Marks Obtained</th>
+        <th class="number-col">Total Marks</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -17,9 +32,13 @@
       <tr *ngFor="let report of reports">
         <td>{{ report.userName }}</td>
         <td>{{ report.examTitle }}</td>
-        <td>{{ report.marksObtained }}</td>
-        <td>{{ report.totalMarks }}</td>
-        <td>{{ report.reportStatus }}</td>
+        <td class="number-col">{{ report.marksObtained }}</td>
+        <td class="number-col">{{ report.totalMarks }}</td>
+        <td>
+          <span class="status-badge status-{{ report.reportStatus | lowercase }}">
+            {{ report.reportStatus }}
+          </span>
+        </td>
       </tr>
     </tbody>
   </table>
