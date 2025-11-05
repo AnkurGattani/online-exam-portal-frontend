@@ -12,7 +12,7 @@ import { AssignQuestionComponent } from './pages/assign-question/assign-question
 import { Home } from './pages/home/home';
 import { authGuard } from './guard/auth-guard';
 import { roleGuard } from './guard/role-guard';
-import { Unauthorized } from './unauthorized/unauthorized';
+import { Unauthorized } from './pages/unauthorized/unauthorized';
 import { UserExam } from './pages/user-exam/user-exam';
 import { StudentDashboard } from './pages/student-dashboard/student-dashboard';
 export const routes: Routes = [
@@ -68,12 +68,9 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'user-exam',
-    component: UserExam,
-  },
-  {
     path: 'student/exams',
     loadComponent: () => import('./pages/user-exam/user-exam').then(m => m.UserExam),
+    canActivate: [authGuard]
   },
   {
     path: 'admin/quizzes',
