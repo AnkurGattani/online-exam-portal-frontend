@@ -1,1 +1,152 @@
-/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.text-center {
+  text-align: center;
+}
+/* styles.css (Global Styles File) */
+
+.main-content-wrapper {
+    /* Push content down by 64px (the height of the standard Mat Toolbar) */
+    padding-top: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/* * --- GENERATED MARGIN UTILITY CLASSES (in px) ---
+ * * Naming Convention:
+ * m   = margin (all sides)
+ * mt  = margin-top
+ * mb  = margin-bottom
+ * ml  = margin-left
+ * mr  = margin-right
+ * * Suffixes: 10, 15, 20 (corresponding to pixel values)
+ * */
+
+/* ----------------------------------- */
+/* 1. Margin for ALL sides (m10, m15, m20)  */
+/* ----------------------------------- */
+
+.m10 {
+  margin: 10px !important;
+}
+
+.m15 {
+  margin: 15px !important;
+}
+
+.m20 {
+  margin: 20px !important;
+}
+
+/* ----------------------------------- */
+/* 2. Margin Top (mt10, mt15, mt20)  */
+/* ----------------------------------- */
+
+.mt10 {
+  margin-top: 10px !important;
+}
+
+.mt15 {
+  margin-top: 15px !important;
+}
+
+.mt20 {
+  margin-top: 20px !important;
+}
+
+/* ----------------------------------- */
+/* 3. Margin Bottom (mb10, mb15, mb20)  */
+/* ----------------------------------- */
+
+.mb10 {
+  margin-bottom: 10px !important;
+}
+
+.mb15 {
+  margin-bottom: 15px !important;
+}
+
+.mb20 {
+  margin-bottom: 20px !important;
+}
+
+/* ----------------------------------- */
+/* 4. Margin Left (ml10, ml15, ml20)  */
+/* ----------------------------------- */
+
+.ml10 {
+  margin-left: 10px !important;
+}
+
+.ml15 {
+  margin-left: 15px !important;
+}
+
+.ml20 {
+  margin-left: 20px !important;
+}
+
+/* ----------------------------------- */
+/* 5. Margin Right (mr10, mr15, mr20)  */
+/* ----------------------------------- */
+
+.mr10 {
+  margin-right: 10px !important;
+}
+
+.mr15 {
+  margin-right: 15px !important;
+}
+
+.mr20 {
+  margin-right: 20px !important;
+}
+
+/* ----------------------------------- */
+/* 6. Corner Case: Your requested names (mgXX, mglXX, etc.)  */
+/* ----------------------------------- */
+/* Although the standard is 'm', 'mt', 'ml', here are the requested 'mg' versions for top, left, right, bottom: */
+
+.mgt10 {
+  margin-top: 10px !important;
+}
+.mgt15 {
+  margin-top: 15px !important;
+}
+.mgt20 {
+  margin-top: 20px !important;
+}
+
+
+.mgb10 {
+  margin-bottom: 10px !important;
+}
+.mgb15 {
+  margin-bottom: 15px !important;
+}
+.mgb20 {
+  margin-bottom: 20px !important;
+}
+
+
+.mgl10 {
+  margin-left: 10px !important;
+}
+.mgl15 {
+  margin-left: 15px !important;
+}
+.mgl20 {
+  margin-left: 20px !important;
+}
+
+
+.mgr10 {
+  margin-right: 10px !important;
+}
+.mgr15 {
+  margin-right: 15px !important;
+}
+.mgr20 {
+  margin-right: 20px !important;
+}

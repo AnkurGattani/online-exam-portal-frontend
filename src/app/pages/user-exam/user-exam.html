@@ -1,0 +1,25 @@
+<mat-card class="mt10 " *ngFor="let quiz of quizzes">
+  <mat-card-header>
+    <mat-card-title>{{ quiz.title }}</mat-card-title>
+    <mat-card-subtitle>{{ quiz.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Maximum Marks: {{ quiz.totalMarks }} </p>
+    <p>Time Limit: {{ quiz.duration }} minutes</p>
+  </mat-card-content>
+
+  <div class="container">
+    <div class="row button-row">
+      <mat-card-actions>
+
+        <button (click)="startQuizConfirmation(quiz.examId)" class="button-margin" mat-raised-button color="primary">
+          Start Quiz
+        </button>
+
+      </mat-card-actions>
+
+    </div>
+  </div>
+
+</mat-card>
+

@@ -1,0 +1,27 @@
+.full-width {
+    width: 100%;
+}
+
+.padding-top-navbar {
+    padding-top: 64px;
+    /* Adjust this value to match the height of your navbar */
+}
+
+
+.nav-cards {
+    display: flex;
+    justify-content: space-around;
+    /* Equal spacing between cards */
+    gap: 20px;
+    /* Space between cards */
+    flex-wrap: wrap;
+    /* Wrap on smaller screens */
+}
+
+
+nav-card {
+    flex: 1 1 200px;
+    /* Flexible width with min size */
+    max-width: 250px;
+    /* Prevent cards from getting too large */
+}
