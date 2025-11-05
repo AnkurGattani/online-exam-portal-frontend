@@ -1,0 +1,19 @@
+<h2>Your Exam Reports</h2>
+<table class="mat-elevation-z8">
+  <thead>
+    <tr>
+      <th>Exam Title</th>
+      <th>Marks Obtained</th>
+      <th>Total Marks</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of reports">
+      <td>{{ report.examTitle }}</td>
+      <td>{{ report.marksObtained }}</td>
+      <td>{{ report.totalMarks }}</td>
+      <td>{{ report.reportStatus }}</td>
+    </tr>
+  </tbody>
+</table>
