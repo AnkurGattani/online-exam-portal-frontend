@@ -1,0 +1,26 @@
+<div class="report-container">
+  <h2>Reports for Exam ID: {{ examId }}</h2>
+  <input type="number" [(ngModel)]="examId" placeholder="Enter Exam ID">
+  <button (click)="loadReports()">Load Reports</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Exam Title</th>
+        <th>Marks Obtained</th>
+        <th>Total Marks</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.userName }}</td>
+        <td>{{ report.examTitle }}</td>
+        <td>{{ report.marksObtained }}</td>
+        <td>{{ report.totalMarks }}</td>
+        <td>{{ report.reportStatus }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
