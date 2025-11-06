@@ -6,12 +6,13 @@ import { error, log } from 'console';
 import Swal from 'sweetalert2';
 import { Quiz, QuizData } from '../../services/viewExam/quiz';
 import { RouterLink, Router } from "@angular/router";
+import { MatIcon } from "@angular/material/icon";
 
 
 @Component({
   selector: 'app-view-quizes',
   standalone: true,
-  imports: [MatCardModule, NgForOf, MatButtonModule, RouterLink], // <-- ADD MatButtonModule HERE
+  imports: [MatCardModule, NgForOf, MatButtonModule, RouterLink, MatIcon], // <-- ADD MatButtonModule HERE
   templateUrl: './view-quizes.html',
   styleUrls: ['./view-quizes.css'],
 })

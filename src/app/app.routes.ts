@@ -63,11 +63,6 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
   },
   {
-    path: 'unauthorized',
-    component: Unauthorized,
-    pathMatch: 'full'
-  },
-  {
     path: 'student/exams',
     loadComponent: () => import('./pages/user-exam/user-exam').then(m => m.UserExam),
     canActivate: [authGuard]
@@ -89,6 +84,10 @@ export const routes: Routes = [
     path: 'admin/reports',
     loadComponent: () => import('./pages/admin-report/admin-report').then(m => m.AdminReport),
     canActivate: [authGuard, roleGuard] //  Only admins
+  },
+  {
+    path: '**',
+    component: Unauthorized,
+    pathMatch: 'full'
   }
-
 ];
