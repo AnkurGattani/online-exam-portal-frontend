@@ -1,0 +1,107 @@
+
+/* --- Container Styling --- */
+.container {
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    background: #f8f9fa;
+    font-family: 'Arvo', serif;
+}
+
+/* --- Image Styling --- */
+.image {
+    margin-bottom: 40px;
+    transform: rotateX(5deg) rotateY(5deg);
+    transition: transform 0.5s ease;
+}
+
+.image:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+    width: 300px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    filter: drop-shadow(0 0 10px rgba(15, 11, 11, 0.3)); /* Red glow */
+}
+
+/* --- Caption Styling --- */
+.caption {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    animation: fadeIn 1s ease-out;
+}
+
+/* --- Title Styling (Gradient + Shadow for Visibility) --- */
+.title {
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+
+    /* Gradient Text */
+    background: linear-gradient(90deg, #e44d26, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    /* Text Shadow for Better Contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+    /* Fallback Color */
+    color: #e44d26;
+}
+
+/* --- Description Text --- */
+.text {
+    font-size: 1.2em;
+    color: #495057;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 400;
+}
+
+.link_404 {
+    color: #fff !important;
+    padding: 10px 20px;
+    background: #ac3131;
+    margin: 20px 0;
+    display: inline-block;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+/* --- Fade-in Animation --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2em;
+    }
+    .caption {
+        padding: 20px;
+    }
+    .image img {
+        width: 250px;
+    }
+}
