@@ -19,8 +19,9 @@ export interface AssignedQuestionToExamDTO {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AssignQuestionService {
-  private baseUrl = 'http://localhost:9091/api/exams';
+  private baseUrl = 'http://localhost:8080/api/exams';
 
   constructor(private http: HttpClient) { }
 
