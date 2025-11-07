@@ -1,11 +1,11 @@
 export interface Option {
     id?: number;
-    text: string;
+    optionText: string;
     isCorrect: boolean;
 }
 
 export interface Question {
-    id?: number;
+    questionId?: number;
     text: string;
     options: Option[];
     difficulty: 'EASY' | 'MEDIUM' | 'HARD';
