@@ -5,12 +5,13 @@ import { QuestionForm } from "./question-form/question-form";
 import { QuestionService } from '../../services/question-bank/question-bank-service';
 import { CommonModule } from '@angular/common';
 import { MatCard, MatCardModule } from "@angular/material/card";
+import { QuestionList } from "./question-list/question-list";
 
 
 @Component({
   selector: 'app-question-bank',
   standalone: true,
-  imports: [CommonModule, MatTabGroup, MatTabsModule, QuestionForm, MatCard, MatCardModule],
+  imports: [CommonModule, MatTabGroup, MatTabsModule, QuestionForm, MatCard, MatCardModule, QuestionList],
   templateUrl: './question-bank.html',
   styleUrl: './question-bank.css',
 })

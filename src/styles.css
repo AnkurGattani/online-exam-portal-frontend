@@ -1,18 +1,27 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 
 .text-center {
   text-align: center;
 }
+
 /* styles.css (Global Styles File) */
 
 .main-content-wrapper {
-    /* Push content down by 64px (the height of the standard Mat Toolbar) */
-    padding-top: 70px;
-    padding-left: 20px;
-    padding-right: 20px;
+  /* Push content down by 64px (the height of the standard Mat Toolbar) */
+  padding-top: 56px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
+
 /* * --- GENERATED MARGIN UTILITY CLASSES (in px) ---
  * * Naming Convention:
  * m   = margin (all sides)
@@ -111,9 +120,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mgt10 {
   margin-top: 10px !important;
 }
+
 .mgt15 {
   margin-top: 15px !important;
 }
+
 .mgt20 {
   margin-top: 20px !important;
 }
@@ -122,9 +133,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mgb10 {
   margin-bottom: 10px !important;
 }
+
 .mgb15 {
   margin-bottom: 15px !important;
 }
+
 .mgb20 {
   margin-bottom: 20px !important;
 }
@@ -133,9 +146,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mgl10 {
   margin-left: 10px !important;
 }
+
 .mgl15 {
   margin-left: 15px !important;
 }
+
 .mgl20 {
   margin-left: 20px !important;
 }
@@ -144,9 +159,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mgr10 {
   margin-right: 10px !important;
 }
+
 .mgr15 {
   margin-right: 15px !important;
 }
+
 .mgr20 {
   margin-right: 20px !important;
 }
