@@ -7,6 +7,7 @@ import { QuestionService } from '../../services/question-bank/question-bank-serv
 @Component({
   selector: 'app-update-question',
   imports: [QuestionForm],
+  standalone: true,
   templateUrl: './update-question.html',
   styleUrl: './update-question.css',
 })
