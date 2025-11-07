@@ -19,18 +19,19 @@ export interface AssignedQuestionToExamDTO {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AssignQuestionService {
   private baseUrl = 'http://localhost:8080/api/exams';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
-assignQuestions(examId: number, criteriaList: any[]): Observable<any> {
-  return this.http.post(`${this.baseUrl}/${examId}/assign-questions`, criteriaList);
-}
+  assignQuestions(examId: number, criteriaList: any[]): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${examId}/assign-questions`, criteriaList);
+  }
 
-getAssignedQuestions(examId: number): Observable<any[]> {
-  return this.http.get<any[]>(`${this.baseUrl}/${examId}/questions`);
-}
+  getAssignedQuestions(examId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${examId}/questions`);
+  }
 
 }

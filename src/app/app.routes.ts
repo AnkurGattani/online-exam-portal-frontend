@@ -12,12 +12,14 @@ import { AssignQuestionComponent } from './pages/assign-question/assign-question
 import { Home } from './pages/home/home';
 import { authGuard } from './guard/auth-guard';
 import { roleGuard } from './guard/role-guard';
-import { Unauthorized } from './unauthorized/unauthorized';
+import { Unauthorized } from './pages/unauthorized/unauthorized';
 import { UserExam } from './pages/user-exam/user-exam';
+import { StudentDashboard } from './pages/student-dashboard/student-dashboard';
+import { UpdateQuestion } from './pages/update-question/update-question';
 export const routes: Routes = [
   {
     path: '',
-    component:Home,
+    component: Home,
     pathMatch: 'full',
   },
   {
@@ -35,22 +37,21 @@ export const routes: Routes = [
     component: AdminDashboard,
     canActivate: [authGuard, roleGuard]
   },
-  // {
-  //   path: 'admin/quizzes',
-  //   component: ViewQuizes,
-  //    canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
-  // },
+  {
+    path: 'student/dashboard',
+    component: StudentDashboard,
+    canActivate: [authGuard]
+  },
   {
     path: 'start/:qid',
     component: Start,
     canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
-  }, // ---------------------------------------------------------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ----------------------------------------------------------------------
-
+  },
+  // ----------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ---------
   {
     path: 'admin/quizzes/:examId/assign-questions',
     component: AssignQuestionComponent,
     pathMatch: 'full',
-    // canActivate: [authGuard, roleGuard],
   },
   {
     path: 'add-quiz',
@@ -63,25 +64,35 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
   },
   {
-    path: 'unauthorized',
-    component: Unauthorized,
-    pathMatch: 'full'
-  },
-  {
-    path: 'user-exam',
-    component: UserExam,
+    path: 'student/exams',
+    loadComponent: () => import('./pages/user-exam/user-exam').then(m => m.UserExam),
+    canActivate: [authGuard]
   },
   {
     path: 'admin/quizzes',
     loadComponent: () => import('./pages/view-exam/view-quizes').then(m => m.ViewQuizes)
   },
-  // {
-  //   path: 'admin/questionbank',
-  //   loadComponent: () => import('./pages/question-bank/questionbank').then(m => m.QuestionBank)
-  // },
-  // {
-  //   path: 'admin/reports',
-  //   loadComponent: () => import('./pages/reports/reports').then(m => m.Reports)
-  // },
-
+  {
+    path: 'admin/questionbank',
+    loadComponent: () => import('./pages/question-bank/question-bank').then(m => m.QuestionBank)
+  },
+  {
+    path: 'student/reports',
+    loadComponent: () => import('./pages/student-report/student-report').then(m => m.StudentReport),
+    canActivate: [authGuard] //  Only logged-in users
+  },
+  {
+    path: 'admin/reports',
+    loadComponent: () => import('./pages/admin-report/admin-report').then(m => m.AdminReport),
+    canActivate: [authGuard, roleGuard] //  Only admins
+  },
+  {
+    path: 'questionbank/edit/:id',
+    component: UpdateQuestion
+  },
+  {
+    path: '**',
+    component: Unauthorized,
+    pathMatch: 'full'
+  }
 ];

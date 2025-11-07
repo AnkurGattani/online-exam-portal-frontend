@@ -1,0 +1,147 @@
+/* --- Global Container and Typography --- */
+.report-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1a237e; /* Deep Indigo */
+  font-size: 2em;
+}
+
+h2 {
+  text-align: left;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  color: #3f51b5; /* Primary Blue */
+  font-size: 1.5em;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.no-data-message {
+  text-align: center;
+  color: #757575;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* --- Input and Button Styling --- */
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="number"] {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: 2px solid #bdbdbd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="number"]:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+  outline: none;
+}
+
+button {
+  padding: 12px 25px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #388e3c; /* Darker Green */
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* --- Table Styling --- */
+table {
+  width: 100%;
+  border-collapse: separate; /* Use separate for rounded corners */
+  border-spacing: 0;
+  margin-top: 20px;
+  overflow: hidden; /* Important for table border-radius */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+thead th {
+  background-color: #3f51b5; /* Primary Blue Header */
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  position: sticky; /* Keep header visible on scroll */
+  top: 0;
+}
+
+tbody tr {
+  border-bottom: 1px solid #eeeeee;
+  transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5; /* Subtle hover effect */
+}
+
+tbody td {
+  padding: 15px;
+  color: #424242;
+}
+
+/* Center numeric columns */
+.number-col {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* --- Status Badge Styling --- */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+/* Specific Status Colors (Adjust 'passed' and 'failed' based on your actual data values) */
+.status-passed {
+  background-color: #e8f5e9; /* Light Green */
+  color: #2e7d32; /* Dark Green Text */
+}
+
+.status-failed {
+  background-color: #ffebee; /* Light Red */
+  color: #c62828; /* Dark Red Text */
+}
+
+/* Example for 'pending' status */
+.status-pending {
+  background-color: #fffde7; /* Light Yellow */
+  color: #ffb300; /* Dark Yellow Text */
+}

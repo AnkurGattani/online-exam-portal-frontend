@@ -1,0 +1,22 @@
+
+<div class="bootstrap-wrapper">
+    <div class="container py-5">
+        <section class="admin-dashboard-header bg-dark text-white p-5 mb-5 rounded shadow-lg">
+            <header class="mb-4">
+                <h1 class="fw-bolder display-4 text-warning">Welcome, {{ studentName() }}</h1>
+                <p class="lead text-light">This is your command center. What's on your mind today?</p>
+            </header>
+
+            <h2 class="text-white mb-4 border-bottom pb-2">Quick Navigation</h2>
+
+            <div class="nav-cards">
+                @for (card of navCards(); track card.title) {
+                <div class="nav-card-item">
+                    <nav-card [title]="card.title" (click)="navigateTo(card.path)"></nav-card>
+                </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>
+

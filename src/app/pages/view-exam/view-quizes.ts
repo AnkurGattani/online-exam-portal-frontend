@@ -6,12 +6,13 @@ import { error, log } from 'console';
 import Swal from 'sweetalert2';
 import { Quiz, QuizData } from '../../services/viewExam/quiz';
 import { RouterLink, Router } from "@angular/router";
+import { MatIcon } from "@angular/material/icon";
 
 
 @Component({
   selector: 'app-view-quizes',
   standalone: true,
-  imports: [MatCardModule, NgForOf, MatButtonModule, RouterLink], // <-- ADD MatButtonModule HERE
+  imports: [MatCardModule, NgForOf, MatButtonModule, RouterLink, MatIcon], // <-- ADD MatButtonModule HERE
   templateUrl: './view-quizes.html',
   styleUrls: ['./view-quizes.css'],
 })
@@ -43,46 +44,6 @@ quizzes: QuizData[] = [];  // explicitly say its an interface type
     )
   }
 
-  startQuizConfirmation(examId: number) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to change your answers once submitted!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6', // Customize button colors
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Start Quiz!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // --- THIS IS THE CRITICAL PART ---
-        // If the user clicks "Yes, Start Quiz!", you put the logic
-        // to actually start the quiz here.
-        // This will likely be a navigation command.
-        // Example: this.router.navigate(['/start-quiz', examId]);
-
-        // For now, let's just show a success message:
-        Swal.fire(
-          'Starting!',
-          'The quiz is now starting.',
-          'success'
-        );
-
-        this.router.navigate(['/start', examId]);
-        // **IMPORTANT:** Add your actual quiz start logic here.
-        // For example, if you need to navigate to the quiz page:
-        // this.router.navigate(['/start-quiz', examId]);
-
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // This block executes if the user clicks "Cancel" or dismisses the dialog
-        Swal.fire(
-          'Cancelled',
-          'You have not started the quiz.',
-          'error'
-        );
-      }
-    });
-  }
 
   // delete quiz
 
