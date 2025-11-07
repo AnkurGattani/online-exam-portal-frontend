@@ -20,10 +20,11 @@
           type="email"
           matInput
           placeholder="Enter your email"
+          pattern="^[a-zA-Z0-9._]+@exammail\.com$"
           required
         />
         <mat-error *ngIf="loginForm.submitted && !user.email">
-          Email is required
+          Email is required and must be end with @exammail.com
         </mat-error>
       </mat-form-field>
 
@@ -37,9 +38,12 @@
           matInput
           placeholder="Enter your password"
           required
+          minlength="6"
+          #password="ngModel"
         />
-        <mat-error *ngIf="loginForm.submitted && !user.password">
-          Password is required
+        <mat-error *ngIf="loginForm.submitted && !user.password" >
+          <div *ngIf="password?.errors?.['required']"> Password is required</div>
+           <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long</div>     
         </mat-error>
       </mat-form-field>
 
@@ -49,6 +53,8 @@
         color="primary"
         type="submit"
         class="login-btn"
+
+        [disabled]="loginForm.invalid"
       >
         Login
       </button>
