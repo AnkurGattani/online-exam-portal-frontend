@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../services/user/user';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-signup',
@@ -18,9 +20,11 @@ import { RouterLink } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    MatCard,
     MatSelectModule,
     MatSnackBarModule,
-    RouterLink
+    RouterLink,
+    CommonModule
 ],
   templateUrl: './signup.html',
   styleUrls: ['./signup.css'],

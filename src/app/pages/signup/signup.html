@@ -1,4 +1,4 @@
-<div class="bootstrap-wrapper">
+<!-- <div class="bootstrap-wrapper">
   <div class="container">
     <div class="row" style="margin-top: 20px;">
       <div class="col-md-6 offset-md-3">
@@ -13,7 +13,7 @@
           <h1 class="text-center">Sign Up / Register here</h1>
         </div>
 
-        <form (ngSubmit)="formSubmit()">
+        <form (ngSubmit)="formSubmit()" #signupForm="ngForm">
 
           <mat-form-field class="full-width" appearance="fill">
             <mat-label> Name</mat-label>
@@ -23,6 +23,7 @@
               matInput
               placeholder="Enter here"
               required
+              
             />
           </mat-form-field>
 
@@ -35,7 +36,14 @@
               matInput
               placeholder="Enter here"
               required
+              pattern="^[a-zA-Z0-9._]+@exammail\.com$"
+              #email="ngModel"
             />
+            <mat-hint>Email must end with <strong>@exammail.com</strong></mat-hint>
+            <mat-error *ngIf="(email.touched || signupForm.submitted) && !email.valid">
+              <div *ngIf="email.errors?.['required']">Email is required</div>
+              <div *ngIf="email.errors?.['pattern']">Email must end with @exammail.com</div>
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width" appearance="fill">
@@ -47,7 +55,14 @@
               matInput
               placeholder="Enter here"
               required
+              #password="ngModel"
+              minlength="6"
             />
+            <mat-hint>Password must be at least <strong>6 characters</strong></mat-hint>
+            <mat-error *ngIf="(password.touched || signupForm.submitted) &&password.invalid">
+              <div *ngIf="password.errors?.['required']">Password is required</div>
+              <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long</div>
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width" appearance="fill">
@@ -69,6 +84,117 @@
       </div>
 
         </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="signup-wrapper">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+
+        <mat-card class="signup-card">
+          <div class="text-center">
+            <img
+              src="assets/logo.png"
+              alt="Signup Image"
+              class="img-fluid logo"
+            />
+            <h1 class="form-title">Sign Up / Register here</h1>
+          </div>
+
+          <form (ngSubmit)="formSubmit()" #signupForm="ngForm">
+
+            <!-- Name Field -->
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Name</mat-label>
+              <input
+                [(ngModel)]="user.name"
+                name="name"
+                matInput
+                placeholder="Enter your name"
+                required
+                #name="ngModel"
+              />
+              <mat-error *ngIf="(name.touched || signupForm.submitted) && name.invalid">
+                Name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Email Field -->
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Email</mat-label>
+              <p class="field-note">Email must end with <strong>@exammail.com</strong></p>
+              <input
+                [(ngModel)]="user.email"
+                name="email"
+                type="email"
+                matInput
+                placeholder="Enter your email"
+                pattern="^[a-zA-Z0-9._]+@exammail\.com$"
+                required
+                #email="ngModel"
+              />
+              <mat-error *ngIf="(email.touched || signupForm.submitted) && email.invalid">
+                <div *ngIf="email.errors?.['required']">Email is required.</div>
+                <div *ngIf="email.errors?.['pattern']">Email must end with @exammail.com</div>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Password Field -->
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Password</mat-label>
+              <p class="field-note">Password must be at least <strong>6 characters</strong> long.</p>
+              <input
+                [(ngModel)]="user.password"
+                name="password"
+                type="password"
+                matInput
+                placeholder="Enter your password"
+                required
+                minlength="6"
+                #password="ngModel"
+              />
+              <mat-error *ngIf="(password.touched || signupForm.submitted) && password.invalid">
+                <div *ngIf="password.errors?.['required']">Password is required.</div>
+                <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</div>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Role Field -->
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>User Role</mat-label>
+              <mat-select [(ngModel)]="user.userRolesEnum" name="userRole" required #userRole="ngModel">
+                <mat-option value="STUDENT">Student</mat-option>
+                <mat-option value="ADMIN">Admin</mat-option>
+              </mat-select>
+              <mat-error *ngIf="(userRole.touched || signupForm.submitted) && userRole.invalid">
+                Please select a user role.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Submit Button -->
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="signupForm.invalid"
+              class="submit-btn"
+            >
+              Register
+            </button>
+
+            <!-- Login Link -->
+            <div class="signup-link">
+              <span>Already have an account?</span>
+              <a routerLink="/login" class="signup-text">Login here</a>
+            </div>
+
+          </form>
+        </mat-card>
+
       </div>
     </div>
   </div>
