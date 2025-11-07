@@ -1,0 +1,42 @@
+.question-list {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+mat-list-item {
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+}
+
+.button-group {
+    display: flex;
+    gap: 5px;
+
+    margin-right: 20px
+}
+
+.button-group button {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    width: 45px;
+}
+
+.custom-button {
+    margin: 15px;
+    height: 35px;
+    width: 65px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

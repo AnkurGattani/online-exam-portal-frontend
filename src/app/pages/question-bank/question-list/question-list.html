@@ -1,0 +1,20 @@
+<mat-card *ngFor="let question of questionList" class="question-card">
+    <div class="card-header">
+        <mat-card-title>{{ question.text }}</mat-card-title>
+        <div class="button-group">
+            <button class="custom-button" mat-raised-button color="primary"
+                (click)="editQuestion(question)">Edit</button>
+            <button class="custom-button" mat-raised-button color="warn"
+                (click)="deleteQuestion(question)">Delete</button>
+        </div>
+
+    </div>
+    <mat-card-subtitle>
+        Category: {{ question.questionType }} | Difficulty: {{ question.difficulty }}
+    </mat-card-subtitle>
+    <mat-list>
+        <mat-list-item *ngFor="let option of question.options">
+            {{ option.optionText }} <span *ngIf="option.isCorrect">✅</span>
+        </mat-list-item>
+    </mat-list>
+</mat-card>
