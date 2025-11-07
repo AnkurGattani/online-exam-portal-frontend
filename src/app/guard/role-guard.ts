@@ -11,12 +11,12 @@ export const roleGuard: CanActivateFn = (route, state) => {
   if (role === 'ADMIN') {
     return true;
   }
-  else if(role === 'STUDENT') {
-      router.navigate(['/user-exam']);
-      return false;
-    }
+  else if (role === 'STUDENT') {
+    router.navigate(['/student/dashboard']);
+    return false;
+  }
   else {
-      router.navigate(['/unauthorized']);
-      return false;
-    }
+    router.navigate(['/unauthorized']);
+    return false;
+  }
 };

@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
 export class Login {
   user = { email: '', password: '' };
 
-  constructor(private snackBar: MatSnackBar, private loginService:LoginService, private router:Router) {}
+  constructor(private snackBar: MatSnackBar, private loginService: LoginService, private router: Router) { }
 
   formSubmit() {
     if (!this.user.email.trim() || !this.user.password) {
@@ -52,13 +52,13 @@ export class Login {
 
         // Redirect based on role
         const role = this.loginService.getUserRole();
-         localStorage.setItem('userRole', role ?? '');
+        localStorage.setItem('userRole', role ?? '');
         console.log('Decoded role from token:', role);
 
         if (role === 'ADMIN') {
           this.router.navigate(['/admin/dashboard']);
         } else if (role === 'STUDENT') {
-          this.router.navigate(['/user-exam']);
+          this.router.navigate(['/student/dashboard']);
         } else {
           this.router.navigate(['/']);
         }

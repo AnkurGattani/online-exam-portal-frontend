@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,7 +26,7 @@ import { MatCardTitle, MatCardModule } from "@angular/material/card";
   templateUrl: './question-form.html',
   styleUrls: ['./question-form.css']
 })
-export class QuestionForm implements OnInit {
+export class QuestionForm implements OnInit, OnChanges {
   @Input() question?: Question;
   @Output() save = new EventEmitter<Question>();
   questionForm!: FormGroup;
@@ -37,16 +37,71 @@ export class QuestionForm implements OnInit {
     this.initForm();
   }
 
-  initForm() {
-    this.questionForm = this.fb.group({
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['question'] && changes['question'].currentValue) {
+      this.patchForm(changes['question'].currentValue);
+    }
+  }
 
+  // initForm() {
+  //   this.questionForm = this.fb.group({
+
+  //     text: [this.question?.text || '', Validators.required],
+  //     type: [this.question?.questionType || '', Validators.required],
+  //     difficulty: [this.question?.difficulty || '', Validators.required],
+  //     marks: [this.question?.marks || 1, [Validators.required, Validators.min(1)]],
+  //     options: this.fb.array([]),
+  //     numericAnswer: [this.question?.correctAnswer?.[0] || '', [Validators.pattern('^[0-9]+$')]] // For Numeric type, only integers
+  //   });
+
+  //   if (this.question?.questionType === 'MULTIPLE_CHOICE_QUESTION' || this.question?.questionType === 'MULTIPLE_SELECT_QUESTION') {
+
+  //     this.question.options?.forEach(opt => {
+
+  //       this.options.push(this.fb.group({
+  //         text: [opt.optionText, Validators.required],
+  //         isCorrect: [opt.isCorrect]
+
+  //       }));
+
+  //     });
+  //   } else if (this.question?.questionType === 'NUMERIC') {
+  //     this.questionForm.get('numericAnswer')?.setValue(this.question.correctAnswer?.[0] || '');
+  //   }
+  // }
+
+  initForm() {
+
+    this.questionForm = this.fb.group({
       text: ['', Validators.required],
       type: ['', Validators.required],
       difficulty: ['', Validators.required],
       marks: [1, [Validators.required, Validators.min(1)]],
       options: this.fb.array([]),
-      numericAnswer: ['', [Validators.pattern('^[0-9]+$')]] // For Numeric type, only integers
+      numericAnswer: ['', [Validators.pattern('^[0-9]+$')]]
     });
+
+  }
+
+  patchForm(question: Question) {
+    this.questionForm.patchValue({
+      text: question.text,
+      type: question.questionType,
+      difficulty: question.difficulty,
+      marks: question.marks,
+      numericAnswer: question.questionType === 'NUMERIC' ? question.correctAnswer?.[0] : ''
+    });
+
+    // clear the form's options FormArray (not the model array)
+    this.options.clear();
+    if (question.questionType === 'MULTIPLE_CHOICE_QUESTION' || question.questionType === 'MULTIPLE_SELECT_QUESTION') {
+      question.options?.forEach(opt => {
+        this.options.push(this.fb.group({
+          text: [opt.optionText, Validators.required],
+          isCorrect: [opt.isCorrect]
+        }));
+      });
+    }
   }
 
   get options(): FormArray {

@@ -12,8 +12,10 @@ import { AssignQuestionComponent } from './pages/assign-question/assign-question
 import { Home } from './pages/home/home';
 import { authGuard } from './guard/auth-guard';
 import { roleGuard } from './guard/role-guard';
-import { Unauthorized } from './unauthorized/unauthorized';
+import { Unauthorized } from './pages/unauthorized/unauthorized';
 import { UserExam } from './pages/user-exam/user-exam';
+import { StudentDashboard } from './pages/student-dashboard/student-dashboard';
+import { UpdateQuestion } from './pages/update-question/update-question';
 export const routes: Routes = [
   {
     path: '',
@@ -36,11 +38,16 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard]
   },
   {
+    path: 'student/dashboard',
+    component: StudentDashboard,
+    canActivate: [authGuard]
+  },
+  {
     path: 'start/:qid',
     component: Start,
     canActivate: [authGuard], // <--- ONLY REQUIRES LOGIN (AUTH)
-  }, // --------------------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ------------------
-
+  },
+  // ----------- // --- PROTECTED ADMIN ROUTES (Require Auth AND Admin Role) --- // ---------
   {
     path: 'admin/quizzes/:examId/assign-questions',
     component: AssignQuestionComponent,
@@ -57,13 +64,9 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
   },
   {
-    path: 'unauthorized',
-    component: Unauthorized,
-    pathMatch: 'full'
-  },
-  {
-    path: 'user-exam',
-    component: UserExam,
+    path: 'student/exams',
+    loadComponent: () => import('./pages/user-exam/user-exam').then(m => m.UserExam),
+    canActivate: [authGuard]
   },
   {
     path: 'admin/quizzes',
@@ -82,6 +85,14 @@ export const routes: Routes = [
     path: 'admin/reports',
     loadComponent: () => import('./pages/admin-report/admin-report').then(m => m.AdminReport),
     canActivate: [authGuard, roleGuard] //  Only admins
+  },
+  {
+    path: 'questionbank/edit/:id',
+    component: UpdateQuestion
+  },
+  {
+    path: '**',
+    component: Unauthorized,
+    pathMatch: 'full'
   }
-
 ];
