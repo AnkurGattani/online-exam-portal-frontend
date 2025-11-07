@@ -15,6 +15,7 @@ import { roleGuard } from './guard/role-guard';
 import { Unauthorized } from './pages/unauthorized/unauthorized';
 import { UserExam } from './pages/user-exam/user-exam';
 import { StudentDashboard } from './pages/student-dashboard/student-dashboard';
+import { UpdateQuestion } from './pages/update-question/update-question';
 export const routes: Routes = [
   {
     path: '',
@@ -84,6 +85,10 @@ export const routes: Routes = [
     path: 'admin/reports',
     loadComponent: () => import('./pages/admin-report/admin-report').then(m => m.AdminReport),
     canActivate: [authGuard, roleGuard] //  Only admins
+  },
+  {
+    path: 'questionbank/edit/:id',
+    component: UpdateQuestion
   },
   {
     path: '**',
