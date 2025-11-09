@@ -51,8 +51,15 @@ export class Login {
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
 
         // Redirect based on role
+        
         const role = this.loginService.getUserRole();
-        localStorage.setItem('userRole', role ?? '');
+        const userId = this.loginService.getUserId();
+        console.log('Decoded userId from token:', userId);
+   
+        if(typeof window!=='undefined')
+        {
+          localStorage.setItem('userRole', role ?? '');
+        }
         console.log('Decoded role from token:', role);
 
         if (role === 'ADMIN') {

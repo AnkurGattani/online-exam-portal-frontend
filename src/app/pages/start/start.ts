@@ -14,6 +14,8 @@ import { Quiz } from '../../services/viewExam/quiz';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { ReportService } from '../../services/report/report';
+import { LoginService } from '../../services/login/login';
 
 export interface OptionForTest {
   optionId: number;
@@ -63,15 +65,23 @@ export class Start implements OnInit {
   // 💡 NEW: This will hold saved answers fetched from the API
   private savedAnswers: { [key: number]: any } = {};
 
-  // 💡 NEW: This holds the user ID.
+   // 💡 NEW: This holds the user ID.
   // TODO: You MUST replace '1' with your actual authentication logic (e.g., from an AuthService)
-  private userId: number = 1;
+  // private userId: number=1;
+  private userId: number=1;
+
+  constructor(private locationSt: LocationStrategy, private route: ActivatedRoute,private reportService:ReportService,private loginService:LoginService) {
+    // initialize userId after loginService is constructed
+    this.userId = this.loginService.getUserId()!;
+  }
+
+ 
 
   private examService = inject(Quiz);
   private ngZone: NgZone = inject(NgZone);
   private router = inject(Router);
 
-  constructor(private locationSt: LocationStrategy, private route: ActivatedRoute) {}
+  // constructor(private locationSt: LocationStrategy, private route: ActivatedRoute,private reportService:ReportService,private loginService:LoginService) {}
 
   ngOnInit(): void {
     this.qid = this.route.snapshot.params['qid'];
@@ -349,46 +359,97 @@ export class Start implements OnInit {
   }
 
   private _handleSubmission(isAutoSubmit: boolean = false) {
-    // 1. Stop the timer
-    if (this.timer) {
-        clearInterval(this.timer);
+  if (this.timer) {
+    clearInterval(this.timer);
+  }
+
+  this.clearTimerStorage();
+  this.isQuizStarted = false;
+
+  this.examService.getFinalResult(this.qid, this.userId).subscribe({
+    next: (response: any) => {
+      const finalScore = response.totalMarks;
+
+      console.log('Final Result Fetched:', response);
+
+      // ✅ Call report generation API
+      const examId = parseInt(this.qid, 10);
+      if (!examId) {
+        console.error('Invalid exam id:', this.qid);
+      } else {
+        this.reportService.generateReport(this.userId, examId).subscribe({
+          next: (report) => {
+            console.log('Report saved successfully:', report);
+          },
+          error: (err) => {
+            console.error('Failed to save report:', err);
+          }
+        });
+      }
+
+      const title = isAutoSubmit ? 'Time is Up!' : 'Submitted!';
+      let text = isAutoSubmit
+        ? 'Your answers have been automatically recorded.'
+        : 'Quiz submitted successfully.';
+
+      Swal.fire({
+        title: title,
+        text: `${text} Your score is: ${finalScore} marks.`,
+        icon: 'success',
+      }).then(() => {
+        this.router.navigate(['/'], { replaceUrl: true });
+      });
+    },
+    error: (err) => {
+      console.error('Failed to fetch final result:', err);
+      Swal.fire('Error', 'Submission successful, but failed to fetch final result.', 'error').then(() => {
+        this.router.navigate(['/'], { replaceUrl: true });
+      });
     }
-
-    this.clearTimerStorage(); // Mark quiz as finished
-    this.isQuizStarted = false;
-
-    // 2. Call the new API to fetch the aggregated result
-    this.examService.getFinalResult(this.qid, this.userId).subscribe({
-        next: (response: any) => {
-            const finalScore = response.totalMarks; // Expects { "totalMarks": 50.0 }
-
-            console.log('Final Result Fetched:', response);
-
-            const title = isAutoSubmit ? 'Time is Up!' : 'Submitted!';
-            let text = isAutoSubmit
-                ? 'Your answers have been automatically recorded.'
-                : 'Quiz submitted successfully.';
-
-            // 3. Display the score in the success alert
-            Swal.fire({
-                title: title,
-                text: `${text} Your score is: ${finalScore} marks.`,
-                icon: 'success',
-            }).then(() => {
-                // Navigate to home page
-                this.router.navigate(['/'], { replaceUrl: true });
-            });
-        },
-        error: (err) => {
-            console.error('Failed to fetch final result:', err);
-
-            // Handle errors (e.g., the 404/CORS issue) by showing a generic message
-            Swal.fire('Error', 'Submission successful, but failed to fetch final result. Check console.', 'error').then(() => {
-                this.router.navigate(['/'], { replaceUrl: true });
-            });
-        }
-    });
+  });
 }
+
+//   private _handleSubmission(isAutoSubmit: boolean = false) {
+//     // 1. Stop the timer
+//     if (this.timer) {
+//         clearInterval(this.timer);
+//     }
+
+//     this.clearTimerStorage(); // Mark quiz as finished
+//     this.isQuizStarted = false;
+
+//     // 2. Call the new API to fetch the aggregated result
+//     this.examService.getFinalResult(this.qid, this.userId).subscribe({
+//         next: (response: any) => {
+//             const finalScore = response.totalMarks; // Expects { "totalMarks": 50.0 }
+
+//             console.log('Final Result Fetched:', response);
+
+//             const title = isAutoSubmit ? 'Time is Up!' : 'Submitted!';
+//             let text = isAutoSubmit
+//                 ? 'Your answers have been automatically recorded.'
+//                 : 'Quiz submitted successfully.';
+
+//             // 3. Display the score in the success alert
+//             Swal.fire({
+//                 title: title,
+//                 text: `${text} Your score is: ${finalScore} marks.`,
+//                 icon: 'success',
+//             }).then(() => {
+//                 // Navigate to home page
+//                 this.router.navigate(['/'], { replaceUrl: true });
+//             });
+//         },
+//         error: (err) => {
+//             console.error('Failed to fetch final result:', err);
+
+//             // Handle errors (e.g., the 404/CORS issue) by showing a generic message
+//             Swal.fire('Error', 'Submission successful, but failed to fetch final result. Check console.', 'error').then(() => {
+//                 this.router.navigate(['/'], { replaceUrl: true });
+//             });
+//         }
+//     });
+// }
 
 // Helper function to clear local storage
 
