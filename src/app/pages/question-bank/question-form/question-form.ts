@@ -27,8 +27,8 @@ import { MatCardTitle, MatCardModule } from "@angular/material/card";
   styleUrls: ['./question-form.css']
 })
 export class QuestionForm implements OnInit, OnChanges {
-  @Input() question?: Question;
-  @Output() save = new EventEmitter<Question>();
+  @Input() question?: Question;   // Child component(QuestionForm) receiving question data from parent component
+  @Output() save = new EventEmitter<Question>();  // Parent component(QuestionBank) listening to this event to get the form data
   questionForm!: FormGroup;
 
   constructor(private fb: FormBuilder) { }
@@ -42,33 +42,6 @@ export class QuestionForm implements OnInit, OnChanges {
       this.patchForm(changes['question'].currentValue);
     }
   }
-
-  // initForm() {
-  //   this.questionForm = this.fb.group({
-
-  //     text: [this.question?.text || '', Validators.required],
-  //     type: [this.question?.questionType || '', Validators.required],
-  //     difficulty: [this.question?.difficulty || '', Validators.required],
-  //     marks: [this.question?.marks || 1, [Validators.required, Validators.min(1)]],
-  //     options: this.fb.array([]),
-  //     numericAnswer: [this.question?.correctAnswer?.[0] || '', [Validators.pattern('^[0-9]+$')]] // For Numeric type, only integers
-  //   });
-
-  //   if (this.question?.questionType === 'MULTIPLE_CHOICE_QUESTION' || this.question?.questionType === 'MULTIPLE_SELECT_QUESTION') {
-
-  //     this.question.options?.forEach(opt => {
-
-  //       this.options.push(this.fb.group({
-  //         text: [opt.optionText, Validators.required],
-  //         isCorrect: [opt.isCorrect]
-
-  //       }));
-
-  //     });
-  //   } else if (this.question?.questionType === 'NUMERIC') {
-  //     this.questionForm.get('numericAnswer')?.setValue(this.question.correctAnswer?.[0] || '');
-  //   }
-  // }
 
   initForm() {
 

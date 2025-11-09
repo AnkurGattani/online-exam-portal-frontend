@@ -11,13 +11,22 @@ import { QuestionList } from "./question-list/question-list";
 @Component({
   selector: 'app-question-bank',
   standalone: true,
-  imports: [CommonModule, MatTabGroup, MatTabsModule, QuestionForm, MatCard, MatCardModule, QuestionList],
+  imports: [
+    CommonModule, // For ngIf and ngFor directives
+    MatTabGroup,
+    MatTabsModule,
+    QuestionForm,
+    MatCard,
+    MatCardModule,
+    QuestionList,
+  ],
   templateUrl: './question-bank.html',
   styleUrl: './question-bank.css',
 })
 export class QuestionBank {
-  selectedFile: File | null = null;
+  selectedFile: File | null = null;   // For upload file
 
+  // Constructor with dependency injection of QuestionService
   constructor(private questionService: QuestionService) { }
 
   onSaveQuestion(questionDTO: Question) {

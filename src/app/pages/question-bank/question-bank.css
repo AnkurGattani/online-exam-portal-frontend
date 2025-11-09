@@ -7,3 +7,24 @@
 .import-section {
     padding: 20px;
 }
+
+.import-section h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.upload-btn {
+    margin: 15px;
+    height: 35px;
+    width: 65px;
+    background-color: rgb(46, 46, 190);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
