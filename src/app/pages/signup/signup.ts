@@ -57,12 +57,12 @@ formSubmit() {
         this.snack.open("User registered successfully", '', { duration: 3000 });
       },
       error: (error) => {
-        console.error(error); // Keep this for debugging the full object
+        console.error(error); 
 
-        // --- NEW ERROR HANDLING LOGIC ---
+        
         let errorMessage = "Something went wrong on the server.";
 
-        // Check if the error.error is an object (which it is, according to your console)
+        
         if (error.error && typeof error.error === 'object') {
 
             // Get all validation messages (values) from the error object

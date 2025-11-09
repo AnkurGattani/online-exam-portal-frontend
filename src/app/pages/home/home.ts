@@ -11,18 +11,18 @@ import { isPlatformBrowser } from '@angular/common'; // 👈 Added isPlatformBro
 })
 export class Home implements OnInit {
 
-    private isBrowser: boolean; // 👈 New property to track the environment
+    private isBrowser: boolean; //New property to track the environment
 
     constructor(
         private router: Router,
-        @Inject(PLATFORM_ID) private platformId: Object // 👈 Inject platform ID
+        @Inject(PLATFORM_ID) private platformId: Object //Inject platform ID
     ) {
         // Determine if the application is running in a browser
         this.isBrowser = isPlatformBrowser(this.platformId);
     }
 
     ngOnInit(): void {
-        // 🛑 FIX: Wrap localStorage access inside the browser check
+        //  FIX: Wrap localStorage access inside the browser check
         if (this.isBrowser) {
             const token = localStorage.getItem('jwtToken');
             const role = localStorage.getItem('userRole');
@@ -31,7 +31,7 @@ export class Home implements OnInit {
                 if (role === 'ADMIN') {
                     this.router.navigate(['/admin/dashboard']);
                 } else if (role === 'STUDENT') {
-                    this.router.navigate(['/']); // or student dashboard if you have one
+                    this.router.navigate(['/student/dashboard']); 
                 }
             }
         }

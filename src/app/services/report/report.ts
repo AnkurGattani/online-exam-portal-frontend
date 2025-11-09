@@ -23,6 +23,11 @@ export class ReportService {
 
   constructor(private http: HttpClient) {}
 
+  generateReport(userId: number, examId: number): Observable<ReportResponse> {
+  return this.http.post<ReportResponse>(`${this.reportUrl}/generate/${userId}/${examId}`, {});
+}
+
+
   getReportsByUser(userId: number): Observable<ReportResponse[]> {
   return this.http.get<ReportResponse[]>(`${this.reportUrl}/user/${userId}`);
 }
@@ -35,18 +40,5 @@ getReportById(reportId: number): Observable<ReportResponse> {
   return this.http.get<ReportResponse>(`${this.reportUrl}/${reportId}`);
 }
 
-  // // Student: Get reports for logged-in user
-  // getReportsByUser(userId: number): Observable<ReportResponse[]> {
-  //   return this.http.get<ReportResponse[]>(`${this.reportUrl}/userId/${userId}`);
-  // }
 
-  // // Admin: Get reports by exam
-  // getReportsByExam(examId: number): Observable<ReportResponse[]> {
-  //   return this.http.get<ReportResponse[]>(`${this.reportUrl}/examId/${examId}`);
-  // }
-
-  // // Admin: Get report by ID
-  // getReportById(reportId: number): Observable<ReportResponse> {
-  //   return this.http.get<ReportResponse>(`${this.reportUrl}/${reportId}`);
-  //}
 }

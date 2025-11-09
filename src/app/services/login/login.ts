@@ -27,6 +27,17 @@ export class LoginService {
     }
   }
 
+  getUserId(): number | null {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.userId || null;
+    } catch {
+      return null;
+    }
+  }
+
   // Check if user is logged in
   isLoggedIn(): boolean {
     return !!localStorage.getItem('jwtToken');
