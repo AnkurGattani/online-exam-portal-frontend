@@ -1,19 +1,32 @@
-<h2>Your Exam Reports</h2>
-<table class="mat-elevation-z8">
-  <thead>
-    <tr>
-      <th>Exam Title</th>
-      <th>Marks Obtained</th>
-      <th>Total Marks</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let report of reports">
-      <td>{{ report.examTitle }}</td>
-      <td>{{ report.marksObtained }}</td>
-      <td>{{ report.totalMarks }}</td>
-      <td>{{ report.reportStatus }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="report-container">
+  <h1>📊Your Exam Reports Dashboard</h1>
+
+  <h2>Your Exam Reports</h2>
+
+  <p *ngIf="!reports || reports.length === 0" class="no-data-message">
+    You have no completed exams to report yet.
+  </p>
+
+  <table *ngIf="reports && reports.length > 0" class="mat-elevation-z8">
+    <thead>
+      <tr>
+        <th>Exam Title</th>
+        <th class="number-col">Marks Obtained</th>
+        <th class="number-col">Total Marks</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.examTitle }}</td>
+        <td class="number-col">{{ report.marksObtained }}</td>
+        <td class="number-col">{{ report.totalMarks }}</td>
+        <td>
+          <span class="status-badge status-{{ report.reportStatus.toLowerCase() }}">
+            {{ report.reportStatus }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
