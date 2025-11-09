@@ -16,10 +16,8 @@ body {
 /* styles.css (Global Styles File) */
 
 .main-content-wrapper {
-  /* Push content down by 64px (the height of the standard Mat Toolbar) */
+  /* Push content down by 56px (the height of the standard Mat Toolbar) */
   padding-top: 56px;
-  padding-left: 20px;
-  padding-right: 20px;
 }
 
 /* * --- GENERATED MARGIN UTILITY CLASSES (in px) ---
