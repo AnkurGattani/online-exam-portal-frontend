@@ -4,6 +4,14 @@
     padding: 20px;
 }
 
+.filters {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    margin: 6px;
+}
+
 mat-list-item {
     font-size: 16px;
     color: #333;

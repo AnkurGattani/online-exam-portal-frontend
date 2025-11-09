@@ -1,20 +1,57 @@
-<mat-card *ngFor="let question of questionList" class="question-card">
-    <div class="card-header">
-        <mat-card-title>{{ question.text }}</mat-card-title>
-        <div class="button-group">
-            <button class="custom-button" mat-raised-button color="primary"
-                (click)="editQuestion(question)">Edit</button>
-            <button class="custom-button" mat-raised-button color="warn"
-                (click)="deleteQuestion(question)">Delete</button>
-        </div>
+<mat-card>
 
+    <!-- Filters -->
+    <div class="filters">
+        <mat-form-field appearance="fill">
+            <mat-label>Filter by Type</mat-label>
+            <mat-select [(ngModel)]="filterType" (selectionChange)="applyFilters()">
+                <mat-option value="ALL">All</mat-option>
+                <mat-option value="MULTIPLE_CHOICE_QUESTION">Multiple Choice</mat-option>
+                <mat-option value="MULTIPLE_SELECT_QUESTION">Multiple Select</mat-option>
+                <mat-option value="NUMERIC">Numeric</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Filter by Difficulty</mat-label>
+            <mat-select [(ngModel)]="filterDifficulty" (selectionChange)="applyFilters()">
+                <mat-option value="ALL">All</mat-option>
+                <mat-option value="EASY">Easy</mat-option>
+                <mat-option value="MEDIUM">Medium</mat-option>
+                <mat-option value="HARD">Hard</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Sort by Marks -->
+        <mat-form-field appearance="fill">
+            <mat-label>Sort by Marks</mat-label>
+            <mat-select [(ngModel)]="sortOrder" (selectionChange)="applyFilters()">
+                <mat-option value="NONE">None</mat-option>
+                <mat-option value="asc">Ascending</mat-option>
+                <mat-option value="desc">Descending</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
-    <mat-card-subtitle>
-        Category: {{ question.questionType }} | Difficulty: {{ question.difficulty }}
-    </mat-card-subtitle>
-    <mat-list>
-        <mat-list-item *ngFor="let option of question.options">
-            {{ option.optionText }} <span *ngIf="option.isCorrect">✅</span>
-        </mat-list-item>
-    </mat-list>
+
+
+    <mat-card *ngFor="let question of filteredQuestions" class="question-card">
+        <div class="card-header">
+            <mat-card-title>{{ question.text }}</mat-card-title>
+            <div class="button-group">
+                <button class="custom-button" mat-raised-button color="primary"
+                    (click)="editQuestion(question)">Edit</button>
+                <button class="custom-button" mat-raised-button color="warn"
+                    (click)="deleteQuestion(question)">Delete</button>
+            </div>
+
+        </div>
+        <mat-card-subtitle>
+            Category: {{ question.questionType }} | Difficulty: {{ question.difficulty }} | {{ question.marks }} Marks
+        </mat-card-subtitle>
+        <mat-list>
+            <mat-list-item *ngFor="let option of question.options">
+                {{ option.optionText }} <span *ngIf="option.isCorrect">✅</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
 </mat-card>
