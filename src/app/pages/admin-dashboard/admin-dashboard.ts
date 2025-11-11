@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavCardComponent } from "../../components/nav-card/nav-card";
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'admin-dashboard',
-  imports: [NavCardComponent],
+  imports: [NavCardComponent, MatCardModule],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,71 +1,45 @@
 <div class="login-wrapper">
   <mat-card class="login-card">
     <div class="text-center">
-      <img
-          src="assets/logo.png"
-          alt="Signup Image"
-          class="img-fluid d-block mx-auto"
-          style="max-height: 300px; margin-bottom: 20px; padding-top: 10%;"/>
+      <img src="assets/logo.png" alt="OnlineExamPortal_Logo" class="img-fluid d-block mx-auto"
+        style="max-height: 300px; margin-bottom: 20px; padding-top: 10%;" />
 
       <h1 class="text-center">Login here</h1>
-       
-      <!-- {{user | json}} -->
-    <form (ngSubmit)="formSubmit()" #loginForm="ngForm">
-      <!-- Email Field -->
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>User Email</mat-label>
-        <input
-          [(ngModel)]="user.email"
-          name="email"
-          type="email"
-          matInput
-          placeholder="Enter your email"
-          pattern="^[a-zA-Z0-9._]+@exammail\.com$"
-          required
-        />
-        <mat-error *ngIf="loginForm.submitted && !user.email">
-          Email is required and must be end with @exammail.com
-        </mat-error>
-      </mat-form-field>
 
-      <!-- Password Field -->
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>User Password</mat-label>
-        <input
-          [(ngModel)]="user.password"
-          name="password"
-          type="password"
-          matInput
-          placeholder="Enter your password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
-        <mat-error *ngIf="loginForm.submitted && !user.password" >
-          <div *ngIf="password?.errors?.['required']"> Password is required</div>
-           <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long</div>     
-        </mat-error>
-      </mat-form-field>
+      <form (ngSubmit)="formSubmit()" #loginForm="ngForm">
+        <!-- Email Field -->
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>User Email</mat-label>
+          <input [(ngModel)]="user.email" name="email" type="email" matInput placeholder="Enter your email"
+            pattern="^[a-zA-Z0-9._]+@exammail\.com$" required />
+          <mat-error *ngIf="loginForm.submitted && !user.email">
+            Email is required and must be end with @exammail.com
+          </mat-error>
+        </mat-form-field>
 
-      <!-- Submit Button -->
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        class="login-btn"
+        <!-- Password Field -->
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>User Password</mat-label>
+          <input [(ngModel)]="user.password" name="password" type="password" matInput placeholder="Enter your password"
+            required minlength="6" #password="ngModel" />
+          <mat-error *ngIf="loginForm.submitted && !user.password">
+            <div *ngIf="password?.errors?.['required']"> Password is required</div>
+            <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long</div>
+          </mat-error>
+        </mat-form-field>
 
-        [disabled]="loginForm.invalid"
-      >
-        Login
-      </button>
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit" class="login-btn" [disabled]="loginForm.invalid">
+          Login
+        </button>
 
-      
-      <!-- Signup Link -->
-      <div class="signup-link">
-        <span>Don't have an account?</span>
-        <a routerLink="/signup" class="signup-text">Sign up here</a>
-      </div>
-    </form>
+
+        <!-- Signup Link -->
+        <div class="signup-link">
+          <span>Don't have an account?</span>
+          <a routerLink="/signup" class="signup-text">Sign up here</a>
+        </div>
+      </form>
     </div>
   </mat-card>
 </div>

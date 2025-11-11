@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import baseUrl from '../helper';
 
 export interface QuestionOptionDTO {
   optionId: number;
@@ -21,17 +22,17 @@ export interface AssignedQuestionToExamDTO {
 })
 
 export class AssignQuestionService {
-  private baseUrl = 'http://localhost:8080/api/exams';
+  private apiUrl = `${baseUrl}/api/exams`;
 
   constructor(private http: HttpClient) { }
 
 
   assignQuestions(examId: number, criteriaList: any[]): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${examId}/assign-questions`, criteriaList);
+    return this.http.post(`${this.apiUrl}/${examId}/assign-questions`, criteriaList);
   }
 
   getAssignedQuestions(examId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/${examId}/questions`);
+    return this.http.get<any[]>(`${this.apiUrl}/${examId}/questions`);
   }
 
 }

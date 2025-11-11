@@ -1,24 +1,17 @@
 <div class="bootstrap-wrapper">
     <div class="container">
-        <div class="row" style="margin-top: 64px;">
-            <section class="container-fluid bg-dark text-white p-4">
-                <!-- Greeting Section -->
-                <header class="mb-4">
-                    <h1 class="fw-bold">Welcome {{ studentName() }},</h1>
-                    <p class="text-secondary">What's on your mind today?</p>
-                </header>
+        <section class="student-dashboard-header">
+            <header>
+                <h1>Welcome, {{ studentName() }}</h1>
+                <p class="lead">What's on your mind today?</p>
+            </header>
 
-                <!-- Stats Panel
-                <stats-panel [stats]="stats()"></stats-panel> -->
-
-                <!-- Navigation Cards -->
-                <div class="nav-cards mt-4">
-                    @for (card of navCards(); track card.title) {
-                    <div class="">
-                        <nav-card [title]="card.title" (click)="navigateTo(card.path)"></nav-card>
-                    </div>
-                    }
-                </div>
-            </section>
-        </div>
+            <h2>Quick Navigation</h2>
+            <div class="nav-cards">
+                @for (card of navCards(); track card.title) {
+                <nav-card class="nav-card-item" [title]="card.title" (click)="navigateTo(card.path)"></nav-card>
+                }
+            </div>
+        </section>
     </div>
+</div>

@@ -134,7 +134,13 @@ export class QuestionForm implements OnInit, OnChanges {
       };
 
       console.log('Mapped QuestionDTO:', questionDTO);
+      // this.initForm(); // Reset form after submission
+      this.reload();
       this.save.emit(questionDTO);
     }
+  }
+  reload() {
+    // this.questionForm.reset();
+    window.location.reload();
   }
 }

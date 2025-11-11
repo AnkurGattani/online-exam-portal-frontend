@@ -9,6 +9,7 @@ import { MatAnchor } from "@angular/material/button";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class QuestionList implements OnInit {
   questionList: Question[] = [];  // Initialize an empty array and make sure it's not undefined and of Question type
   filteredQuestions: Question[] = [];
 
+  // Filter and sort criteria
   filterType: string = 'ALL';
   filterDifficulty: string = 'ALL';
   sortOrder: string = 'NONE';
@@ -38,7 +40,7 @@ export class QuestionList implements OnInit {
   // Constructor with dependency injection
   constructor(private questionService: QuestionService, private router: Router) { }
 
-  // OnInit lifecycle hook to fetch questions when component initializes
+  // OnInit hook to fetch questions when component initializes
   ngOnInit(): void {
     this.questionService.getAllQuestions().subscribe((data: Question[]) => {
       this.questionList = data;
@@ -49,6 +51,7 @@ export class QuestionList implements OnInit {
     });
   }
 
+  // Method to apply filters and sorting
   applyFilters(): void {
     let filteredCriteria = [...this.questionList];
 
@@ -60,31 +63,41 @@ export class QuestionList implements OnInit {
       filteredCriteria = filteredCriteria.filter(q => q.difficulty === this.filterDifficulty);
     }
 
-    if (this.sortOrder === 'asc') {
+    if (this.sortOrder === 'asc') {   // Sort by ascending marks
       filteredCriteria.sort((a, b) => a.marks - b.marks);
-    } else if (this.sortOrder === 'desc') {
+    } else if (this.sortOrder === 'desc') { // Sort by descending marks
       filteredCriteria.sort((a, b) => b.marks - a.marks);
     }
 
     this.filteredQuestions = filteredCriteria;
   }
 
+  // For editing question, reroute to edit page
   editQuestion(question: Question): void {
     this.router.navigate(['/questionbank/edit', question.questionId]);
   };
 
+  // Delete a question
   deleteQuestion(question: Question): void {
-    console.log('Inside deleteQuestion component method for question:', question);
+    // console.log('Inside deleteQuestion component method for question:', question);
     const id = question.questionId;
-    if (confirm('Are you sure you want to delete this question?')) {
-      if (id == null) {  // can't delete a question without an id
-        return;
-      }
-      console.log('Deleting question with id:', id);
-
-      this.questionService.deleteQuestion(id).subscribe(() => {
-        this.questionList = this.questionList.filter(q => q.questionId !== id);
-      });
+    if (id == null) {  // can't delete a question without an id
+      return;
     }
+    console.log('Deleting question with id:', id);
+    Swal.fire({
+      icon: 'info',
+      title: 'Are you sure you want to delete this question?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true,
+    }).then((swalResult) => {
+      if (swalResult.isConfirmed) {
+        this.questionService.deleteQuestion(id).subscribe(() => {
+          this.questionList = this.questionList.filter(q => q.questionId !== id);
+          this.applyFilters(); // Re-apply filters to update the displayed list
+          Swal.fire('Deleted!', 'The question has been deleted.', 'success');
+        });
+      }
+    });
   }
 }

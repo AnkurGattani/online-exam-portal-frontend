@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="card-holder">
   <h1 style="text-align: center;"> Add New Quiz</h1>
   <div class="container">
 
@@ -14,7 +14,8 @@
 
           <mat-form-field class="w100" appearance="fill">
             <mat-label>Enter description</mat-label>
-            <textarea [(ngModel)]="quiz.description" name="description" placeholder="Enter here" matInput rows="4"></textarea>
+            <textarea [(ngModel)]="quiz.description" name="description" placeholder="Enter here" matInput
+              rows="4"></textarea>
           </mat-form-field>
 
           <div class="row">
@@ -22,21 +23,22 @@
             <div class="col-md-6">
               <mat-form-field class="w100" appearance="fill">
                 <mat-label> Enter Total Marks</mat-label>
-                <input [(ngModel)]="quiz.totalMarks" type="number" name="totalMarks" placeholder="Enter Marks here" matInput>
+                <input [(ngModel)]="quiz.totalMarks" type="number" name="totalMarks" placeholder="Enter Marks here"
+                  matInput>
               </mat-form-field>
             </div>
             <div class="col-md-6">
               <mat-form-field class="w100" appearance="fill">
                 <mat-label>Enter Duration of Exam (in Mins)</mat-label>
-                <input  [(ngModel)]="quiz.duration" type="number" name="duration" placeholder="Enter duration in minutes" matInput>
+                <input [(ngModel)]="quiz.duration" type="number" name="duration" placeholder="Enter duration in minutes"
+                  matInput>
               </mat-form-field>
             </div>
 
           </div>
 
           <div class="container text-center">
-            <button
-             mat-raised-button color="accent" type="submit">Add</button>
+            <button mat-raised-button color="accent" type="submit">Add</button>
           </div>
 
         </form>

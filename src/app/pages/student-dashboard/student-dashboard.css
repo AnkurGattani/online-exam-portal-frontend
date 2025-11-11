@@ -1,23 +1,94 @@
-.full-width {
+/* Color Palette */
+:root {
+    --primary-blue: #3f51b5;
+    --accent-pink: #3f51b5;
+    --soft-bg: #f4f7f6;
+}
+
+/* Wrapper */
+.bootstrap-wrapper {
+    background-color: var(--soft-bg);
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    margin: auto;
+}
+
+/* Container */
+.container {
     width: 100%;
+    max-width: 1200px;
+    text-align: center;
 }
 
-.padding-top-navbar {
-    padding-top: 64px;
+/* Header Section */
+.student-dashboard-header {
+    background: linear-gradient(135deg, #ffffff, #f5f8ff);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+.student-dashboard-header h1 {
+    color: #3f51b5;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-align: start;
+}
 
+.student-dashboard-header .lead {
+    color: #505050;
+    font-size: 1.2rem;
+    text-align: start;
+}
+
+.student-dashboard-header h2 {
+    color: #3f51b5;
+    margin: 2rem 0 1.5rem;
+    font-size: 1.5rem;
+}
+
+/* Navigation Cards Grid */
 .nav-cards {
     display: flex;
-    justify-content: space-around;
-    /* Equal spacing between cards */
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 35px;
+    justify-content: space-around;
 }
 
+/* Each Card */
+.nav-card-item {
+    max-width: 320px;
+}
 
-nav-card {
-    flex: 1 1 200px;
-    max-width: 250px;
-    /* Prevent cards from getting too large */
+/* Styling nav-card component */
+:host ::ng-deep nav-card {
+    display: block;
+    background-color: #ffffff;
+    color: var(--primary-blue);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    min-height: 140px;
+    /* Rectangular height */
+    border-left: 5px solid var(--accent-pink);
+    border: none;
+}
+
+:host ::ng-deep nav-card:hover {
+    background-color: #3f51b553;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-left-color: var(--primary-blue);
+}
+
+:host ::ng-deep nav-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--primary-blue);
 }

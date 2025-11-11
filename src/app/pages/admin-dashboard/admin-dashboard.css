@@ -1,97 +1,94 @@
-/* --- Color Palette from Report Module --- */
-/* Deep Blue (Primary): #3f51b5 */
-/* Accent Green (Success): #4caf50 */
-/* Dark Background: #1e293b */
+/* Color Palette */
+:root {
+    --primary-blue: #3f51b5;
+    --accent-pink: #3f51b5;
+    --soft-bg: #f4f7f6;
+}
 
-/* General Layout and Background */
+/* Wrapper */
 .bootstrap-wrapper {
-    background-color: #f4f7f6;
-    min-height: 100vh;
+    background-color: var(--soft-bg);
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    margin: auto;
 }
 
+/* Container */
 .container {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
 }
 
-/* Header Section Styling */
+/* Header Section */
 .admin-dashboard-header {
-    background: linear-gradient(135deg, #2a59a4, #234393) !important;
-    border-radius: 12px !important;
-    padding: 3.5rem !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ffffff, #f5f8ff);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .admin-dashboard-header h1 {
-    color: #ffc107 !important;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    color: #3f51b5;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-align: start;
 }
 
 .admin-dashboard-header .lead {
-    color: #a0aec0;
+    color: #505050;
+    font-size: 1.2rem;
+    text-align: start;
 }
 
 .admin-dashboard-header h2 {
-    color: #1a276e !important;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
+    color: #3f51b5;
+    margin: 2rem 0 1.5rem;
+    font-size: 1.5rem;
 }
 
-/* 🚀 FIX: Navigation Cards Layout (Using Flexbox for better alignment) */
+/* Navigation Cards Grid */
 .nav-cards {
     display: flex;
-    /* This makes sure lines of cards start from the left */
-    justify-content: flex-start;
-    /* Consistent spacing between all items */
-    gap: 25px;
     flex-wrap: wrap;
+    gap: 35px;
+    justify-content: center;
 }
 
+/* Each Card */
 .nav-card-item {
-    /* Set a fixed size basis for the cards and allow them to grow if space permits */
-    flex: 0 0 250px;
-    /* If you prefer cards to stretch to fill the row: flex: 1 1 250px; */
-    /* If you want the cards to align perfectly under each other, stick with flex: 0 0 250px; */
-    /* You can remove max-width to let flex handle sizing */
-    /* max-width: 280px;  */
+    max-width: 320px;
 }
 
-
-/* IMPORTANT: Styling the Custom nav-card Component */
+/* Styling nav-card component */
 :host ::ng-deep nav-card {
     display: block;
-    background-color: #2d3748;
-    color: rgb(147, 147, 23);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+    background-color: #ffffff;
+    color: var(--primary-blue);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    min-height: 130px;
-    /* Accent stripe with Report Module Green */
-    border-left: 5px solid #4caf50;
-    width: 100%; /* Ensure it takes full width of its container */
+    min-height: 140px;
+    /* Rectangular height */
+    border-left: 5px solid var(--accent-pink);
+    border: none;
 }
 
-/* Hover Effect */
 :host ::ng-deep nav-card:hover {
-    background-color: #3b4554;
-    transform: translateY(-7px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    /* Change accent color to Deep Blue on hover */
-    border-left-color: #3f51b5;
+    background-color: #3f51b553;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-left-color: var(--primary-blue);
 }
 
-/* Ensure the component content looks good inside the card */
 :host ::ng-deep nav-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 600;
     margin: 0;
-}
-
-/* --- Utility Classes --- */
-.full-width {
-    width: 100%;
+    color: var(--primary-blue);
 }
